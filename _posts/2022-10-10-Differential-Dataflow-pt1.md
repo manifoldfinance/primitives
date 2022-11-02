@@ -661,7 +661,7 @@ claim we might try to prove:
 
 Let's prove the `iff` in two parts,
 
-1.      **If `t <= g`, then `s <= g`: **
+1.       **If `t <= g`, then `s <= g`: **
 
     For any `f` we have that `s <= join(s,f)`, but in particular for those
     `f in F`. Because `s` is less than all terms in the meet, and by the main
