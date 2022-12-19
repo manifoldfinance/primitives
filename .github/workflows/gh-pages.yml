@@ -1,18 +1,16 @@
 name: GitHub Pages
 on:
   push:
-    branches:
-      - master
 
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       DEPLOY_DIR: _site/
       DEPLOY_BRANCH: gh-pages
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Prepare branch
         run: |
@@ -69,7 +67,7 @@ jobs:
     if: ${{ needs.bump_version.outputs.new_tag != null }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
 
