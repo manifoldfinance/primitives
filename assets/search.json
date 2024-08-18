@@ -1,0 +1,103 @@
+[{
+            "title"    : "Ad-hoc State Simulations in Ethereum with Erigon Overlays",
+            "subtitle" : "",
+            "tags"     : "ethereum, json rpc, client development",
+            "url"      : "/pages/manifoldfinance/primitives/simulating-transactions-using-erigon-overlays",
+            "date"     : "2024-08-17 17:00:00 -0700"
+        },{
+            "title"    : "Rationality Is Self Defeating",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/rationality-is-self-defeating",
+            "date"     : "2022-11-21 00:00:00 -0800"
+        },{
+            "title"    : "Optimal autonomous organizations",
+            "subtitle" : "Imagine if the holders of Chipotle shares had to elect the next new burrito flavor",
+            "tags"     : "DAO",
+            "url"      : "/pages/manifoldfinance/primitives/optimal-autonomous-organizations",
+            "date"     : "2022-10-12 00:00:00 -0700"
+        },{
+            "title"    : "High Resolution High Throughput",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/high-resolution-high-throughput",
+            "date"     : "2022-10-11 00:00:00 -0700"
+        },{
+            "title"    : "Differential Dataflow Pt1",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/differential-dataflow-pt1",
+            "date"     : "2022-10-10 00:00:00 -0700"
+        },{
+            "title"    : "File locking in Linux",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/lockfiles-in-linux",
+            "date"     : "2022-10-05 00:00:00 -0700"
+        },{
+            "title"    : "Questions For New Tech",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/questions-for-new-tech",
+            "date"     : "2022-10-04 00:00:00 -0700"
+        },{
+            "title"    : "Pricing Transaction Costs",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/pricing-transaction-costs",
+            "date"     : "2022-09-28 00:00:00 -0700"
+        },{
+            "title"    : "The Allowchain",
+            "subtitle" : "The Blockchain and the Whitechain",
+            "tags"     : "ethereum, blockchain, distributed computing, dao, governance",
+            "url"      : "/pages/manifoldfinance/primitives/the-allowchain",
+            "date"     : "2022-05-25 00:00:00 -0700"
+        },{
+            "title"    : "Is Folk&#39;s theorem the Blockchain&#39;s nightmare",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/mev-and-folks-theorem",
+            "date"     : "2022-05-20 00:00:00 -0700"
+        },{
+            "title"    : "Uniswapv3",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/uniswapv3",
+            "date"     : "2022-05-06 00:00:00 -0700"
+        },{
+            "title"    : "Automated Detection Of Dynamic State",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/automated-detection-of-dynamic-state",
+            "date"     : "2022-02-10 00:00:00 -0800"
+        },{
+            "title"    : "lvm-localpv - a good upgrade to local-path-provisioner",
+            "subtitle" : "lvm-localpv is a good upgrade to local-path-provisioner",
+            "tags"     : "gitops, devops, distributed computing, nix, tooling",
+            "url"      : "/pages/manifoldfinance/primitives/lvm-localpv",
+            "date"     : "2022-01-12 00:00:00 -0800"
+        },{
+            "title"    : "Liquidity Adjusted Arrival Price",
+            "subtitle" : "Benchmarking Trade Execution and Routing",
+            "tags"     : "ethereum, blockchain, distributed computing, routing, amm, trading",
+            "url"      : "/pages/manifoldfinance/primitives/liquidity-adjusted-arrival-price",
+            "date"     : "2022-01-10 00:00:00 -0800"
+        },{
+            "title"    : "Susshiswap_chef",
+            "subtitle" : "",
+            "tags"     : "analysis, sushiswap, protocol",
+            "url"      : "/pages/manifoldfinance/primitives/susshiswap-chef",
+            "date"     : "2021-12-27 00:00:00 -0800"
+        },{
+            "title"    : " The Mythical Web3 Developer Experience",
+            "subtitle" : "",
+            "tags"     : "",
+            "url"      : "/pages/manifoldfinance/primitives/web3-technical-debt-creep",
+            "date"     : "2021-12-20 00:00:00 -0800"
+        },{
+            "title"    : "Hello, world!",
+            "subtitle" : "Test example",
+            "tags"     : "Jekyll, Markdown",
+            "url"      : "/pages/manifoldfinance/primitives/hello-world",
+            "date"     : "2020-01-01 00:00:00 -0800"
+        }]

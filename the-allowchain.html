@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The Allowchain | Primitives</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="The Allowchain" />
+<meta name="author" content="Curtis Yarvin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The blockchain and the whitechain - by Curtis Yarvin" />
+<meta property="og:description" content="The blockchain and the whitechain - by Curtis Yarvin" />
+<link rel="canonical" href="https://github.com/pages/manifoldfinance/primitives/the-allowchain" />
+<meta property="og:url" content="https://github.com/pages/manifoldfinance/primitives/the-allowchain" />
+<meta property="og:site_name" content="Primitives" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-25T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The Allowchain" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Curtis Yarvin"},"dateModified":"2022-05-25T00:00:00-07:00","datePublished":"2022-05-25T00:00:00-07:00","description":"The blockchain and the whitechain - by Curtis Yarvin","headline":"The Allowchain","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/pages/manifoldfinance/primitives/the-allowchain"},"url":"https://github.com/pages/manifoldfinance/primitives/the-allowchain"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://github.com/pages/manifoldfinance/primitives/feed.xml" title="Primitives" /><!-- Emoji Favicon  -->
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎄</text></svg>"
+  />
+  <!-- <link rel="shortcut icon" href="/pages/manifoldfinance/primitives/favicon.ico"> -->
+
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/pages/manifoldfinance/primitives/assets/css/main.min.css" />
+</head>
+<body><!-- Navigation -->
+<nav
+  class="navbar navbar-default navbar-custom navbar-fixed-top invert"
+>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <a class="navbar-brand" href="/pages/manifoldfinance/primitives/">Primitives</a>
+      <button class="navbar-toggle" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/pages/manifoldfinance/primitives/">Home</a>
+          </li><li>
+            <a href="/pages/manifoldfinance/primitives/about">About</a>
+          </li><li>
+            <a href="/pages/manifoldfinance/primitives/archive">Archive</a>
+          </li><li class="search-icon">
+            <a href="javascript:void(0)">
+              <i class="fas fa-search"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fas fa-chevron-down"></i>
+    </span>
+  </div>
+
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form>
+          <input type="text" id="search-input" placeholder="$ grep..." />
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Post Header --><header
+  class="intro-header style-text"
+>
+  <div class="header-mask"></div><div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <div class="tags"><a
+              class="tag"
+              href="/pages/manifoldfinance/primitives/archive/?tag=ethereum"
+              title="ethereum"
+              >ethereum</a
+            ><a
+              class="tag"
+              href="/pages/manifoldfinance/primitives/archive/?tag=blockchain"
+              title="blockchain"
+              >blockchain</a
+            ><a
+              class="tag"
+              href="/pages/manifoldfinance/primitives/archive/?tag=distributed+computing"
+              title="distributed computing"
+              >distributed computing</a
+            ><a
+              class="tag"
+              href="/pages/manifoldfinance/primitives/archive/?tag=dao"
+              title="dao"
+              >dao</a
+            ><a
+              class="tag"
+              href="/pages/manifoldfinance/primitives/archive/?tag=governance"
+              title="governance"
+              >governance</a
+            ></div>
+          <h1>The Allowchain</h1>
+          <h2 class="subheading">The Blockchain and the Whitechain</h2>
+          <span class="meta"
+            >Posted by Curtis Yarvin on May 25, 2022</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header><!-- Post Content -->
+<style>
+  /* Place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: 0.1em;
+    }
+  }
+</style>
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
+      ><h1 id="the-blockchain-and-the-whitechain---by-curtis-yarvin">The blockchain and the whitechain - by Curtis Yarvin</h1>
+
+<blockquote>
+  <p>“There is one centralized whitelist of registered addresses.”</p>
+</blockquote>
+
+<p>The libertarian dream of crypto isn’t dead yet—but we can see its death from here. Crypto is still a revolution. But it is a financial revolution, not a political revolution. Any political revolution will have to be a consequence of the financial revolution—and there is no certainty in any such revolution.</p>
+
+<h3 id="the-path-to-the-whitechain">The path to the whitechain</h3>
+
+<p>The future belongs to <em>whitelists</em>—or “allowlists” for our brilliant new century. A <em>whitelist</em> is a list of registered, or <em>white</em>, addresses. A <em>whitechain</em> is a blockchain in which sending tokens to an unregistered address either destroys or refunds them. There is one centralized whitelist of registered addresses.</p>
+
+<p>Naturally, a legitimate address is matched to a legitimate account at a legitimate bank. Money laundering on the whitechain is as hard as money laundering with a bank account. If a token has ever left the whitechain and passed through a nonwhite address, it cannot be traded in any way by any legitimate exchange—it is just <em>dead</em>.</p>
+
+<p>The larval state is the <em>graychain</em>, in which a centralized “denylist” lists “bad” wallets. For example, DoJ or Treasury could be posting a continuously updated list of blocked addresses, believed to belong to Russian oligarchs or whoever. Any traffic with these addresses would be traced by all legitimate exchanges and bar any sale or redemption.</p>
+
+<p>It is surprising that the graychain does not already exist, forcing exchanges to check a live USG-certified blacklist before trading any tokens. But once there is a blacklist, the leap to a whitelist is just a matter of data—banks need to submit the addresses for all of their crypto-savvy customers. It can be uploaded on reels of tape, or something. If you have an outside wallet, send a form to the government.</p>
+
+<p>When a sufficiently powerful financial hegemon regulates the blockchain this way, first excommunicating a positive set of bad actors with a blacklist, then all those who refuse to take communion (get their crypto into a registered account) with a whitelist. Of course, those who fear the spotlight of the confessional are likely to be bad actors…</p>
+
+<p>Soon, the wilds are tamed. Black crypto still exists—but it is effectively a different currency. And a much cheaper currency, since its paths to fiat are winding at best. They may be nonexistent, in which black crypto is possibly worthless. Privacy coins still exist—they can be treated like black crypto, ie, trivially murdered by regulation. No legitimate exchange can trade either fiat or white crypto for them.</p>
+
+<p>At this point, it seems as if crypto has been neutered. It has not been neutered at all. Rather, it has snuck inside the walls—discarding its irritant qualities.</p>
+
+<p>Who cares about money laundering? Who cares about yield farming? Not Jesus. Did Jesus drive the hodlers out of the temple? Or the flash-loan peddlers, the algorithmic stablecoins, the degen rug-pullers? To ask the question is to answer it.</p>
+
+<p>It is a pity that the Au and Ag of crypto could not turn themselves into privacy coins, creating a winning monetary contender that also mathematically defied the state. Why do the powers that be keep getting lucky? To test our hearts, I suppose.</p>
+
+<p>But once the state gets to know the classic blockchain, the state likes it quite a bit. The blockchain is a kind of technical perfection of the official record that lies at the heart of every civilized state. The earliest histories are mere king-lists—ie, records of transactions in sovereignty.</p>
+
+<p>This attraction is a fatal one—because crypto is a more attractive currency than state equity. Namely, it is harder. Regulating it legitimizes it and makes it more dangerous.</p>
+
+<h3 id="the-next-stage">The next stage</h3>
+
+<p>Crypto—ideally one standard crypto, for there can be only one—then concentrates on its new mission: increasing the pool of savings stored in the new monetary standard, and unifying competing pools of savings. (It is certainly not technically unimaginable to envision a <em>financial</em> merger, a pooling of interests, between Bitcoin and Ethereum—though it would require both to exhibit unprecedented strategic governance capacity.)</p>
+
+<p>In an environment of financial deflation, such as the Federal Reserve in their great wisdom has in the spring of 2022 created by raising the price of money—the interest rate—above the historical pittance that yet already poisons our pneumonic economy, the prices of all assets valued by their direct or imputed yield itself plummets. This gives everyone an incentive to sell them for cash.</p>
+
+<p>But is crypto like cash? Or is it the ultimate momentum-driven risk asset? It is both—it is either.</p>
+
+<p>In the boom, crypto did not act like cash. It acted like junk. It exhibited remarkable correlation with risk assets—on the way up, and on the way down (so far). Will this correlation continue?</p>
+
+<p>Reddit traders refer to the strength of hands—meaning the level of decline a hodler can accept before caving and selling. Junk money has paper hands. Cash money—coins in the hands of true hodlers—has diamond hands. Crypto winters are necessary to flush out the weak hands and shift coins into strong hands. Hardness is a measure of this strength.</p>
+
+<p>Rising interest rates inherently cause flight from capital assets which are valued by yield production. This is just math. The quantity of capital of a certain term that is demanded at a certain interest rate is not correct when the interest rate changes. This creates a game of musical chairs in which anyone can sit down with a mouse click.</p>
+
+<p>The place to park money is (a) cash or (b) bearish bets. It is not assets priced by yield. It is not assets inflated by boom money. It is assets valued as monetary standards.</p>
+
+<h3 id="the-both-way-bet">The both-way bet</h3>
+
+<p>The ideal situation for crypto is that some of this flight from “risk” assets priced by yield falls into crypto rather than fiat—neither of which is priced by yield.</p>
+
+<p>For this to happen, the crypto sellers whose thesis that crypto and everything that isn’t dollars always goes up has just been disproved have to exit crypto. All the old junk money has to leave the building. This is the classic crypto winter.</p>
+
+<p>Once the junk outflows are finished, the pattern of crypto trading is set by the old hodlers and new smart money—those whose money falls out of bull-market assets and into crypto, at a time when it is flat. The cause of this trade is that the trader has both (a) capitulated on the asset market and (b) been enlightened in the monetary market.</p>
+
+<p>Junk money is “smart beta”—it makes money by chasing market patterns and hoping they continue. This hope is also known as “risk.”</p>
+
+<p>Capital flight is widespread and rational in a bear market. Once the pattern that crypto (or gold, or anything else) is a capital-flight target in a bear market asserts itself in the data, this pattern will be imitated and amplified by waves of junk money. This amplified pattern—if it can happen—will drive the next stage of monetization.</p>
+
+<p>If crypto can rise in a brutal bear market for yield-returning assets as fleeing investors bounce into coins instead of dollars, crypto will convince the robots that it is an asset that goes up in both kinds of markets.</p>
+
+<p>The robots will then begin to chase it even more, causing it to go up even more—almost as if they see the <a href="https://www.unqualified-reservations.org/2009/08/urs-crash-course-in-sound-economics/">Nash equilibrium</a>. This will go on until a new overhang of weak hands builds up… unless it is the last cycle in <a href="https://www.unqualified-reservations.org/2011/04/on-monetary-restandardization/">the process</a>, of course!</p>
+
+
+        <!-- Post Pager -->
+        <div>
+          <hr style="visibility: hidden" />
+          <ul class="pager"><li class="previous">
+              <a
+                href="/pages/manifoldfinance/primitives/mev-and-folks-theorem"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Is Folk's theorem the Blockchain's nightmare"
+              >
+                Previous<br />
+                <span>Is Folk's theorem the Blockchain's nightmare</span>
+              </a>
+            </li><li class="next">
+              <a
+                href="/pages/manifoldfinance/primitives/pricing-transaction-costs"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Pricing Transaction Costs"
+              >
+                Next<br />
+                <span>Pricing Transaction Costs</span>
+              </a>
+            </li></ul>
+          <hr style="visibility: hidden" />
+        </div></div><!-- Side Catalog Container -->
+      <div
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container"
+      >
+        <div class="side-catalog">
+          <hr class="hidden-sm hidden-xs" />
+          <h5>
+            <a class="catalog-toggle" href="#">CATALOG</a>
+          </h5>
+          <ul class="catalog-body"></ul>
+        </div>
+      </div><!-- Sidebar Container -->
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container"
+      ><!-- Featured Tags -->
+<section><hr class="hidden-sm hidden-xs"><h5>
+        <a href="/pages/manifoldfinance/primitives/archive/">FEATURED TAGS</a>
+    </h5>
+    <div class="tags"><a data-sort="0014"
+            href="/pages/manifoldfinance/primitives/archive/?tag=distributed+computing"
+            title="distributed computing"
+            rel="3">distributed computing</a><a data-sort="0014"
+            href="/pages/manifoldfinance/primitives/archive/?tag=ethereum"
+            title="ethereum"
+            rel="3">ethereum</a><a data-sort="0015"
+            href="/pages/manifoldfinance/primitives/archive/?tag=blockchain"
+            title="blockchain"
+            rel="2">blockchain</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=DAO"
+            title="DAO"
+            rel="1">DAO</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=Jekyll"
+            title="Jekyll"
+            rel="1">Jekyll</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=Markdown"
+            title="Markdown"
+            rel="1">Markdown</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=amm"
+            title="amm"
+            rel="1">amm</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=analysis"
+            title="analysis"
+            rel="1">analysis</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=client+development"
+            title="client development"
+            rel="1">client development</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=dao"
+            title="dao"
+            rel="1">dao</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=devops"
+            title="devops"
+            rel="1">devops</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=gitops"
+            title="gitops"
+            rel="1">gitops</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=governance"
+            title="governance"
+            rel="1">governance</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=json+rpc"
+            title="json rpc"
+            rel="1">json rpc</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=nix"
+            title="nix"
+            rel="1">nix</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=protocol"
+            title="protocol"
+            rel="1">protocol</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=routing"
+            title="routing"
+            rel="1">routing</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=sushiswap"
+            title="sushiswap"
+            rel="1">sushiswap</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=tooling"
+            title="tooling"
+            rel="1">tooling</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=trading"
+            title="trading"
+            rel="1">trading</a>
+    </div>
+</section>
+</div>
+    </div>
+  </div>
+</article>
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><!-- SNS -->
+<ul class="list-inline text-center">
+  
+  <li>
+    <a href="/pages/manifoldfinance/primitives/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li><li>
+    <a target="_blank" href="mailto:sam@manifoldfinance.com">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li><li>
+    <a target="_blank" href="https://github.com/manifoldfinance">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fab fa-github fa-stack-2x"></i>
+      </span>
+    </a>
+  </li><li>
+    <a href="https://twitter.com/foldfinance">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li></ul>
+<p class="copyright text-muted">See
+          <a href="https://github.com/sambacha"></a> @sambacha | &copy; 2022-2024 manifoldfinance
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+  crossorigin="anonymous"
+></script>
+
+<!-- Bootstrap JavaScript-->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+  integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+  crossorigin="anonymous"
+></script>
+
+<!-- Simple Jekyll Search -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.7.12/simple-jekyll-search.min.js"
+  integrity="sha512-APy7Ff/y4pdIHleqiTMcRZ8Wu6tjfqhJpgAcaCvTuFQPj/G+/A5u0uZi/DkfkuLQ6FeFmDJgh/zl0y3If/VUyA=="
+  crossorigin="anonymous"
+></script>
+
+<!-- MathJax https://github.com/mathjax/MathJax/issues/2220 -->
+<script>
+  MathJax = {
+    options: {
+      renderActions: {
+        /* add a new named action not to override the original 'find' action */
+        find_script_mathtex: [
+          10,
+          function (doc) {
+            for (const node of document.querySelectorAll(
+              'script[type^="math/tex"]',
+            )) {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(
+                node.textContent,
+                doc.inputJax[0],
+                display,
+              );
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = { node: text, delim: '', n: 0 };
+              math.end = { node: text, delim: '', n: 0 };
+              doc.math.push(math);
+            }
+          },
+          '',
+        ],
+      },
+    },
+  };
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.5/es5/tex-chtml.js"
+  integrity="sha512-WIPUeuVusAT6dUtN6xKArYCBEa76ltyvaz3ltvQd+dy7ISdGJv1Y3y7eDBEF986YfNtmZGLdAaEBSgeBb+8OSg=="
+  crossorigin="anonymous"
+></script>
+
+<!-- Async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          c(null, e);
+        },
+        false,
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script><!-- AnchorJS -->
+<script>
+  async(
+    'https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js',
+    function () {
+      anchors.options = {
+        visible: 'hover',
+      };
+      anchors
+        .add()
+        .remove('.intro-header h1')
+        .remove('.subheading')
+        .remove('.sidebar-container h5');
+    },
+  );
+</script><!-- Custom JavaScript -->
+<script src="/pages/manifoldfinance/primitives/assets/js/main.js"></script><!-- Side Catalog -->
+<script src="/pages/manifoldfinance/primitives/assets/js/catalog.js"></script></body>
+</html>

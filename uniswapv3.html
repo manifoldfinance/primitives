@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Uniswapv3 | Primitives</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Uniswapv3" />
+<meta name="author" content="Zainab Hasan https://twitter.com/zainabhasan24" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Uniswap v3: Power To Liquidity Providers" />
+<meta property="og:description" content="Uniswap v3: Power To Liquidity Providers" />
+<link rel="canonical" href="https://github.com/pages/manifoldfinance/primitives/uniswapv3" />
+<meta property="og:url" content="https://github.com/pages/manifoldfinance/primitives/uniswapv3" />
+<meta property="og:site_name" content="Primitives" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-06T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Uniswapv3" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Zainab Hasan https://twitter.com/zainabhasan24"},"dateModified":"2022-05-06T00:00:00-07:00","datePublished":"2022-05-06T00:00:00-07:00","description":"Uniswap v3: Power To Liquidity Providers","headline":"Uniswapv3","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/pages/manifoldfinance/primitives/uniswapv3"},"url":"https://github.com/pages/manifoldfinance/primitives/uniswapv3"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://github.com/pages/manifoldfinance/primitives/feed.xml" title="Primitives" /><!-- Emoji Favicon  -->
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎄</text></svg>"
+  />
+  <!-- <link rel="shortcut icon" href="/pages/manifoldfinance/primitives/favicon.ico"> -->
+
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/pages/manifoldfinance/primitives/assets/css/main.min.css" />
+</head>
+<body><!-- Navigation -->
+<nav
+  class="navbar navbar-default navbar-custom navbar-fixed-top invert"
+>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <a class="navbar-brand" href="/pages/manifoldfinance/primitives/">Primitives</a>
+      <button class="navbar-toggle" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/pages/manifoldfinance/primitives/">Home</a>
+          </li><li>
+            <a href="/pages/manifoldfinance/primitives/about">About</a>
+          </li><li>
+            <a href="/pages/manifoldfinance/primitives/archive">Archive</a>
+          </li><li class="search-icon">
+            <a href="javascript:void(0)">
+              <i class="fas fa-search"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fas fa-chevron-down"></i>
+    </span>
+  </div>
+
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form>
+          <input type="text" id="search-input" placeholder="$ grep..." />
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Post Header --><header
+  class="intro-header style-text"
+>
+  <div class="header-mask"></div><div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <div class="tags"></div>
+          <h1>Uniswapv3</h1>
+          <h2 class="subheading"></h2>
+          <span class="meta"
+            >Posted by Zainab Hasan https://twitter.com/zainabhasan24 on May 6, 2022</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header><!-- Post Content -->
+<style>
+  /* Place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: 0.1em;
+    }
+  }
+</style>
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
+      ><h1 id="uniswap-v3-power-to-liquidity-providers">Uniswap v3: Power To Liquidity Providers</h1>
+
+<blockquote>
+  <p>Uniswap v3 mitigates capital inefficiency as LPs can provide liquidity depth within specified price ranges while risking far less capital.</p>
+</blockquote>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Uniswap is quite well-known in the world of Defi. Uniswap v1 was launched in December 2018, with proof of concept for automated market makers. In contrast, Uniswap v2 was launched in May 2020 with new features. With $4.17Billions locked in Uniswap v2, the Uniswap team announced Uniswap v3, which is said to launch on the fifth of May, 2021.</p>
+
+<p>The team publicized the protocols <a href="https://github.com/Uniswap/uniswap-v3-core">codebase</a> and published a <a href="https://uniswap.org/blog/uniswap-v3/">blog</a> on it as well.</p>
+
+<p><a href="https://xord.solutions/publications/uniswap-v2-protocol-lets-dive-in/">Learn about the Uniswap v2 protocol in-depth in our article.</a></p>
+
+<h2 id="uniswap-v3">Uniswap v3</h2>
+
+<p>Before we dive into the details of Uniswap v3, let’s first see why the protocol is even needed.<br />
+The problem that lies in constant function market makers is capital inefficiency.<br />
+Uniswap v3 mitigates this by allowing liquidity providers to concentrate their liquidity. By doing so, they can provide the same liquidity depth as Uniswap v2 within specified price ranges while putting far less capital at risk.</p>
+
+<h2 id="concentrated-liquidity">Concentrated Liquidity</h2>
+
+<p>In the earlier versions, LPs provided liquidity in the entire price range, i.e. [0,∞]. In Uniswap v3, LPs can concentrate their liquidity in smaller price ranges.</p>
+
+<p>Liquidity concentrated to a finite range is called <strong>position</strong>. </p>
+
+<p>Now, consider the following graph </p>
+
+<p><img src="https://xord.com/wp-content/uploads/2021/05/image-1.png" alt="" /></p>
+
+<p>Graph 1</p>
+
+<p>The above graph (graph 1) represents the liquidity in a pool. If a liquidity provider adds liquidity in the position [a,b], those will be real reserves, and the rest will be virtual reserves.</p>
+
+<p>Let’s say that L is the amount of liquidity provided in position, equal to √ 𝑘. (it is a simple change in notation).</p>
+
+<p>To calculate the amount of liquidity that will be after a swap transaction, we will assume that x is decreasing and the amount of y is increasing.</p>
+
+<p>Then, x-real is represented by the change in liquidity with respect to change in position b </p>
+
+<p><img src="https://lh3.googleusercontent.com/TTBk2pyu-BOm5-VB2zPsKli7PangH-MBur9npLo-cTuxaCIiRxBNd70Nsbax5SWYrnuLT3IVMS9ElgzTKvkl98foPpO9yI2C3la73rBhKlVzdnDiDCMaH3yXZj5geVi1sNq90TFw" alt="Formula: real X reserves" /></p>
+
+<p>Formula: real X reserves</p>
+
+<p>And y-real is represented as the change in liquidity with the increase in position a.</p>
+
+<p><img src="https://lh4.googleusercontent.com/5RIpvW0jXM9HeVEzhOD-3fu_6mG4X55evZ29deS8q_6XMCz03yPL3arZr-xNi4kw3g6eByP-2LQC-IiQQJEdP7hfBD5BQuPtSJ91-N9xpKMWXSVBOVahRDaovTGSiJdZmNpTZaVK" alt="Formula: real Y reserves" /></p>
+
+<p>Formula: real Y reserves</p>
+
+<p>To get the total liquidity of that reserve, we add the virtual and real reserves, and as we know that x*y = k.</p>
+
+<p><img src="https://lh4.googleusercontent.com/jyzLj_2asIyI8h1ZVuwRy9-_OAvHdu-j1A79BE-tsgXcL_AHztJ78EpUHDPAy9seQIOP30XHz53wksahVNNvuY9sRlC3WtleISPOU__SDTnRDhJeiJ6B6rZa0xyZewCfugTIlQCV" alt="Uniswap v3: Formula for total liquidity of reserves" /></p>
+
+<p>The formula for total liquidity of reserves</p>
+
+<h3 id="active-liquidity-and-range-orders">Active Liquidity and Range Orders</h3>
+
+<p>When the market prices move outside of a position, in this state, an LP’s liquidity is converted entirely to the less valuable of the two assets until the market price moves back into their specified positions or they decide to update their range to account for current prices. If the market price moves back into that range, the position will be traded back, effectively reversing the trade, turning the liquidity into active liquidity.<br />
+LPs cannot earn fees, nor will they suffer impermanent loss if their liquidity is not active.</p>
+
+<p>As stated above<strong>,</strong> when liquidity moves outside the specified position, the entire assets convert into less valuable tokens. However, liquidity providers can still provide liquidity in this range. To do so, they can use the conventional way, or they can add liquidity by using just one asset (the less valuable asset as the price is outside this range). As the price moves back in that position, liquidity will become active.</p>
+
+<p><img src="https://lh4.googleusercontent.com/BqpCdhPRtbzEPLHLJbWV0VH9CVFnKekyenafB3sLgB_s1EQL9_mvDL1SMHUAm8n3AB0SsPW9hgTTknHyQaQofY-hM_bMTQjQtY6q0fbU44a8xP3HZkSS6wPbjQOdckxgRLMqrnIU" alt="Code block for Active and Inactive liquidity" /></p>
+
+<p>Code block for Active and Inactive liquidity</p>
+
+<p>When the current ratio moves left concerning the current position, token0 (the amount of token0 in the pool) changes if the current ratio moves right concerning the current position, the amount of token1 changes. </p>
+
+<p><img src="https://xord.com/wp-content/uploads/2021/05/image.png" alt="" /></p>
+
+<p>Graph 2</p>
+
+<p>In terms of smart contracts, the assets’ conversion is only done when adding or removing liquidity. </p>
+
+<h2 id="architectural-changes">Architectural Changes</h2>
+
+<p>This section states the architectural changes in Uniswap v3.</p>
+
+<h3 id="multiple-pool-pairs">Multiple Pool Pairs</h3>
+
+<p>In the previous versions of Uniswap, every pair corresponds to a single liquidity pool. A total of 0.30% per swap is cut as part of the fee. This fee amount is low for the pools, which do not have much daily volume.<br />
+For this reason, Uniswap v3 introduces multiple pools for each pair of tokens. Each pool with a different swap fee. Factory contract allows the creation of pools. Since the maximum precision for fees is up to 4 decimal points. Factory contract can create three fee tiers: 0.05%, 0.30%, and 1%. Additional fee tiers can be enabled by UNI governance.</p>
+
+<p><img src="https://lh6.googleusercontent.com/d7jIzfyHn31VI_2YZqyei48srYy_zdkzZ19W6LWjZwG-mA2Qqil4yhJnILmIC4zMndZV3auukSgMP_revcz0xztfANWdhYoKmlBubxKZrnNn3sdfQeAhtfg9PvDYbJsfyQrqOYhB" alt="Code block for enabling fee amount" /></p>
+
+<p>Code block for enabling fee amount</p>
+
+<h3 id="non-fungible-liquidity">Non-fungible Liquidity</h3>
+
+<p>As LPs can create custom ranges, representing pool shares in ERC-20 tokens is complex in calculating the positions’ accumulated fees. As positions are unique (in terms of the amount of provided liquidity or range selected), using non-fungible tokens is more practical. However, anyone can create an ERC-20 token contract wrapper in the periphery that makes a liquidity position more fungible. But additional logic to handle distribution or reinvestment collected fees is also required. The NonfungiblePositionManager.sol wraps Uniswap V3 positions in the ERC721 non-fungible token interface.</p>
+
+<p>Also, because of customs liquidity positions, fees are not reinvested in the pool. It is not collected and held by the pool as individual tokens.</p>
+
+<h2 id="governance">Governance:</h2>
+
+<p>In the previous Uniswap versions, the trading fee of 0.3% is cut off in each swap. Furthermore, Uniswap v2 introduced a switch to turn the protocol fee on or off, allowing the protocol to collect 1/N (where n equals 6) of the total fee amount paid by users.</p>
+
+<p>In Uniswap v3, however, this N can be any number between 4 to 10 and can be 0. So, the protocol may collect 10% to 25% of the fee amount. Governance can change this fee amount.</p>
+
+<p>The power of governance initially lies in the hands of UNI token holders. The owner of the factory is a <a href="https://etherscan.io/address/0x1a9c8182c09f50c8318d769245bea52c32be35bc#code">timelock contract</a>.</p>
+
+<p>Governance can add fee tiers as well. </p>
+
+<p>Lastly, the UNI governance can transfer its governance authority to another contract.</p>
+
+<p>.</p>
+
+<p><img src="https://lh6.googleusercontent.com/_-CjhtmRGPb2yHzGRVW0D0z94oPqGF8hBQ3mkQuokuSc0ZimXPWo-VZioOhARLLjifUvJv3KMDjRWyUmI01t6QtXqmZHoP369MD4lFQphNlaiweUhtgwf3FNIVNpYloytgTPvpkJ" alt="Code block for transferring ownership" /></p>
+
+<p>Code block for transferring ownership</p>
+
+<h2 id="oracles">Oracles:</h2>
+
+<p>Instead of accumulating the sum of prices like in Uniswap v2, and letting users compute the arithmetic mean for TWAP. Uniswap v3 tracks the sum of log prices which allows users to compute the geometric mean for TWAP.</p>
+
+<p>The reason to calculate the geometric mean for the TWAP is that there are now at least 3 pools per pair. So arithmetic mean would give the wrong average price as it will only track how much the price is increasing. But calculating at which ratio they are increasing is more precise. </p>
+
+<p>Lastly, Uniswap v3 adds a liquidity accumulator that is tracked alongside the price accumulator. This liquidity accumulator can be used by other contracts to decide which of the pools corresponding to a pair will have the most reliable TWAP. As Uniswap v3 has multiple pools for the same pairs, <strong>see section 4.1</strong>.</p>
+
+<h3 id="oracle-observations">Oracle Observations</h3>
+
+<p>Uniswap v3 offers improvements to the TWAP oracle of Uniswap v2 by making it possible to calculate any recent TWAP up to the past ~9 days in a single on-chain call as the checkpoints are in the <em>core contract</em>. This is achieved by storing an array of cumulative sums instead of just one.</p>
+
+<p>So, users of oracles don’t have to track previous values of the accumulator.</p>
+
+<p><img src="https://lh3.googleusercontent.com/nsKGYJR_9DIy1JzdJu5W_-154KWrp1Nde-Ruu_XtlMmW9y78R_MDdaqJbPHOmLceuyqKAP6q0t3BtFpCR70z6T2XPW8Ih3HM_XHPnMDMdhJx-YjwHYk3ATotWjfsgEq5J1zKmP0W" alt="Code block for observe function" /></p>
+
+<p>Code block for observe function</p>
+
+<p>The above <em>observe</em> function is used to get the data of the defined time window. </p>
+
+<p>The function returns the cumulative tick and liquidity as of each timestamp `secondsAgo` from the current block timestamp. To get a time-weighted average tick or liquidity-in-range, you must call this with two values, one representing the beginning of the period and another for the end of the period. </p>
+
+<p>For example: to get the last hour time-weighted average tick, you must call it with secondsAgos = [3600, 0].</p>
+
+<p>For each individual pool, the contract is maintaining the arithmetic mean for the TWAP. The time-weighted average tick represents the arithmetic time-weighted average price of the pool, in log base sqrt(1.0001) of token1 / token0. The <a href="https://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/libraries/TickMath.sol">TickMath library</a> can be used to go from a tick value to a ratio.</p>
+
+<p><img src="https://lh3.googleusercontent.com/cL6krZeJz52CyhVeQcos6lrOce3MjYx4HPAIANsTUH26xiIqrSj8d15ifxLe7kpewac1q8jTfs43PPjs9TovifakJhiGgbE2qms1ItXpQh2-CJyvdeARo8CGAXvhq7etjd2DyQPJ" alt="Code block for increaseObservationCardinalityNext function" /></p>
+
+<p>Code block for <em>increaseObservationCardinalityNext</em> function</p>
+
+<p>The <em>increaseObservationCardinalityNext</em> function increases the length of the accumulator window. It essentially increases the maximum number of price and liquidity observations that this pool will store. </p>
+
+<h3 id="liquidity-oracle">Liquidity Oracle</h3>
+
+<p>The Uniswap v3 oracle also tracks an accumulator of the current value of the virtual liquidity currently in range at the beginning of each block, stored in the <em>liquidityCumulative</em> variable. </p>
+
+<h2 id="implementing-concentrated-liquidity">Implementing Concentrated Liquidity</h2>
+
+<h3 id="price-and-liquidity">Price And Liquidity</h3>
+
+<p>As mentioned in <strong>section 3,</strong> the amount of liquidity added is L which is equivalent to √k. This turns the CFMM into the following equation</p>
+
+<p><img src="https://lh5.googleusercontent.com/gK4Od1FRndjDn9KJkwUQ4QcKscug02FBTWgNGACJc5WzpeeCM3NHq-vgzpvAHHGUW_6_hgyxU8UmHrwthYpSKw6sTn98wgLvsr76U4hcC3_PgT6k6xBcIxuXv3I2fzkXos2pnwiW" alt="Uniswap v3: Formula for CFMM" /></p>
+
+<p>Formula for CFMM</p>
+
+<p>As price is just ratio between two tokens, taking the square root, we get </p>
+
+<p><img src="https://lh5.googleusercontent.com/r3xeepKigLF_xuopoNWNRGJKpajScEumIrgqy8FBJamLtoZhVMONzWQsfBzvjIwLjCQGp06F1Hq5kPeYPfG8beE78B7vVXVzToLWyqJdb60fYkjl3I6T8QrDzrHH0aJgt-a4hrQl" alt="Uniswap v3: Formula for Price" /></p>
+
+<p>Formula for Price</p>
+
+<p>We already went through the calculation to get the real value of x and y reserves in equations (a) and (b).</p>
+
+<p>Using 𝐿 and √ 𝑃 is convenient because only one of them changes at a time. Price changes when swapping within a position; liquidity changes when moving outside of the position or when liquidity is minted or burned. </p>
+
+<p>Alternatively, liquidity can be considered the amount that token1 reserves change for a given change in √ 𝑃.</p>
+
+<p><img src="https://lh5.googleusercontent.com/Ajy_G9f8aPGM-fcDZPiR9qVOXoUf15seKnotwZn-eBZr3R7RYU-czNmvV1Ouq6NgP8PRGfiNyfBvy099st0O0lDnj32_Q0VdjsRf35Lzt90R8rDBiFSuFvOD37kBesrjstFb1yNA" alt="Uniswap v3: Formula for liquidity" /></p>
+
+<p>Formula for liquidity</p>
+
+<p>Derived from equation (b)</p>
+
+<p>To take advantage of this relationship and avoid taking any square roots when computing swaps, √ 𝑃 is tracked. </p>
+
+<h3 id="ticks">Ticks</h3>
+
+<p>Ticks are price positions on the curve, and when two price positions, i.e., two ticks, are plotted on the curve, we get a range. TickSpacing is the spread between two ticks. Ticks can only be used at multiples of this value.</p>
+
+<p>This means that ticks are tickSpacing away from each other, and so ticks cannot be initialized at every value. </p>
+
+<p>We will go forward with the stated assumption that prices are always expressed as the price of token0 in terms of token1.</p>
+
+<p>Price can be used to calculate a tick and vice versa.</p>
+
+<p>There is a virtual tick at every price change that is an integer power of 1.0001. </p>
+
+<p>If i represents tick and p represents price, then,</p>
+
+<p><img src="https://lh4.googleusercontent.com/s4E3L9iaVltJGWcDM9dfaQCXlNhPUNe9DkQYWK1GvTwnzb22bQPFmmhQi6Dwc_V9mc2ZB6FvCUe5LalMzVEcVQ43AFlCCWa20nj-HWbG8n6JDK41w5TiQDvfmGN1W_H6CyjBcos9" alt="Formula for price at current tick (i)" /></p>
+
+<p>Formula for price at current tick (i)</p>
+
+<p>This has the property of plotting each tick at a 0.01% (1 basis point) price movement away from each adjacent tick. For reasons stated in section 7.1, √ 𝑃 is tracked.</p>
+
+<p>Hence,</p>
+
+<p><img src="https://lh6.googleusercontent.com/fkNYJL0Bvmom3HuxUwqXZqrSN2hU4cIOuFVcRmlhfwWAmvFtEY9nm3jWo_mfa_eVMLZcSd6VL7a8SnqsEN6HLyc6oSnUYAUDFII0WExaGCgof4gIAyGrE85bX68GBrBU8XoPvOIR" alt="Formula for price at current tick (ii)" /></p>
+
+<p>Formula for price at current tick (ii)</p>
+
+<p>When liquidity is added to a position, if even one of the ticks isn’t in use, its initialization is triggered.</p>
+
+<p>And, to calculate current tick (ic):</p>
+
+<p><img src="https://lh3.googleusercontent.com/-rOyEwyCCZf0AnFdeWpT7yLdid57zai3Yeh_NYEE8iK1oizlgUXLC1WHKe5ojJWen8cduTfiXtAWsv8gBSVJuathWkEi65KegC_kCCUAdk1n1m0U8C3JuU0ed-p_cqrR_65rBWqC" alt="Formula for current tick" /></p>
+
+<p>Formula for current tick</p>
+
+<h3 id="tick-bitmap">Tick Bitmap</h3>
+
+<p>Ticks that are not initialized can be skipped during a swap. Furthermore, a bitmap is named <a href="https://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/libraries/TickBitmap.sol">TickBitmap</a>. The bitmap position corresponding to the tick index is set to 1 if the tick is initialized and 0 if it is not initialized. On removing liquidity, the initialized tick can be uninitialized.</p>
+
+<h3 id="fees">Fees</h3>
+
+<p>As with swaps, a fee amount is cut off, this was relatively straightforward in Uniswap v2, but in Uniswap v3, positions and ticks need to be catered.</p>
+
+<p>Again, the fee amount is collected in terms of tokens rather than in terms of liquidity.</p>
+
+<p>Consider global variable states as stated in the whitepaper.</p>
+
+<p><img src="https://xord.com/wp-content/uploads/2021/06/image.png" alt="" /></p>
+
+<p>Global state variables</p>
+
+<p>The <em>feeGrowthGlobal0X128</em> and <em>feeGrowthGlobal1X128</em> represent the global fee (in terms of token0 and token1) accrued by LPs. The values of all the above variables change when a swap takes place. However, when liquidity is added or removed, only <em>L</em> changes.</p>
+
+<p><img src="https://xord.com/wp-content/uploads/2021/06/image-1.png" alt="" /></p>
+
+<p>Tick indexed state variables</p>
+
+<p>The contract needs to store information about each tick to track the amount of net liquidity that should be added or removed when the tick is crossed and track the fees earned above and below that tick.  When ticks are updated, the variables present in the tick-indexed state are updated. You can consider that after updating the global state of the contract, the pool is updating the fees collected and liquidity updated at the specific price point, which is tickUpper and tickLower.</p>
+
+<p>Now, Coming towards how the fee distribution is done.</p>
+
+<p>The tick-indexed state variables track how much fees are earned at an indexed tick. To calculate the fees that were accumulated within a given range, <em>feeGrowthOutside{0,1}</em> is subtracted from the global accumulated fees.</p>
+
+<p>If fee between [a,b] is fa and fb at point a and b respectively, current tick is ic, and we’re calculating the value for tick i. Then the above ranges make sense. Keeping in mind that the ratio for price is token0/token1. Then ic &gt;= i for fa and ic &lt;= i for fb.</p>
+
+<p><img src="https://lh6.googleusercontent.com/uJqJCCNPKYSlv1IYC-1Op-a-Z4TKJV_2buHngDHx6Maby5dA_AsGosed7AKEj9qUQuZau22UlXHU7eEUyZbH62dhcI2I2n1YUZ4-nRtAObPxLa32YBXhiaTDF-yeFc1BCmB-piuF" alt="Ranges of current" /></p>
+
+<p>Ranges of current</p>
+
+<p> So, to compute the total amount of cumulative fees per share fia,ib in the range between two ticks ia and ib.</p>
+
+<p><img src="https://lh6.googleusercontent.com/lN_sXd-taD1JNGiVJ5HxGWYlzDFq5J9xv0PADdBJiLb_GqOr3NwhNoLUekxrBb3tZB4BSaTpss4BMr020KN5XRdUCwh-mMtBnzFjgNXU8VissETzZj0RFMqtp66GBsEV5xfDRtnn" alt="Code block for fee calculation" /></p>
+
+<p>Code block for fee calculation</p>
+
+<p>Now, we have the accumulated fee inside a range. But, many liquidity providers may have provided different liquidity values in the same range. The tokens protocol owes to them will differ now.</p>
+
+<p>The amount of tokens owed to LPs in a range is calculated in the <a href="https://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/libraries/Poshttps://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/libraries/Position.solition.sol">positions library</a>. This makes use of the formula.</p>
+
+<p>Uncollected fee(y) = L . (feeGrowthInside - feeGrowthInsideLast)</p>
+
+<p>Uncollected fee(x) = L / (1/ feeGrowthInside - 1/ feeGrowthInsideLast)</p>
+
+<p>The positions are keeping track of how much fees have been earned in <em>feeGrowthInside{0,1} the Last</em> variable. Whereas, to calculate the latest amount of fees, the current state of ticks is used. Subtracting both values will give us the difference and increase in change. Multiplying this by the position’s liquidity gives us the total uncollected fees in token0 for this position.</p>
+
+<p><img src="https://lh3.googleusercontent.com/UR3u8vodijd1meB7lyOSEY39nWZPZjizqRWp13rlgc-mGeah_czlxtm66xEJ2whsqetJat33DGWlmjDVoRosf1G079Opvsp-eTJ63w0KxpoI5yOGGKiSw9Drb62Xt2Q8egxS3yat" alt="Code block for fee calculation (i)" /></p>
+
+<p>Code block for fee calculation (i)</p>
+
+<p>Whereas, during a swap, <em>feeGrowthOutside</em> changes. </p>
+
+<p><img src="https://lh6.googleusercontent.com/0EebQzON84TibceByCsPgXjIPTy6ea-hM30lMkgKHEVPcWkmmyffI6-7S8fUXEUnxwVMlgEgO85avLOgn13wJJPoT65BRbdinH2YhmJaJaimsTG0i7jVBPEg0M9VKIRTpNEs8PH6" alt="Code block for fee calculation (ii)" /></p>
+
+<p>Code block for fee calculation (ii)</p>
+
+<p>And when LPs collect the fee amount, <em>feeGrowthInside</em> is calculated in the same way as stated above. This is then divided by the amount of liquidity present in the position, which gives the amount owed, i.e., tokenOwed{0,1}.</p>
+
+<p>Tokenowed represents how many uncollected tokens are owed to the position as of the last computation and adds it to the last accumulated amount of accrued fee.</p>
+
+<h2 id="in-to-the-codebase">In-To The CodeBase:</h2>
+
+<p>We already explored parts of the code in the previous sections. We’ll look at different code blocks in this section. However, we’ll skip the obvious ones.</p>
+
+<h3 id="uniswap-v3-core">Uniswap v3 Core:</h3>
+
+<p>The <a href="https://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/UniswapV3Factory.sol">factory contract</a> facilitates the creation of pools. It also enables control of the protocol’s fee.</p>
+
+<p>The function <em>createPool</em> is used to <strong>create a pool</strong>. This function takes the pool tokens and fee as input. </p>
+
+<p><img src="https://lh6.googleusercontent.com/HNkSsoigMA5inUrgqfRkGStWM8qJ9Z49bInuJCO03hn6FDgFbfzmJb2ZCq_EpeuB3p4qv_hB0-xcmxcVOZAcn_2VbaTRnyFGxnLAdFq2uGxGhXzOeX0F3p53TlWAsKGCvItSPHC6" alt="Uniswap v3: Code block for create pool function" /></p>
+
+<p>Code block for create pool function</p>
+
+<p>The function runs the necessary checks on token addresses; it stores the token addresses and fees in the <em>getPool</em> mapping. The <em>tickSpacing</em> is retrieved from the fee. The call will revert if the pool already exists, the fee is invalid, or the token arguments are invalid.</p>
+
+<p>The <a href="https://github.com/Uniswap/uniswap-v3-core/blob/main/contracts/UniswapV3Pool.sol">Uniswap pool contract</a> facilitates swapping and automated market-making between any two assets that strictly conform to the ERC20 specification.</p>
+
+<p>The purpose of <em>initialize</em> function is to <strong>initialize the price</strong> of the pool. Price is represented as a sqrt(amountToken1/amountToken0) Q64.96 value, i.e. rational number with 64bit precision before the decimal and 96 bits precision value succeeding decimal point.</p>
+
+<p>The 0th storage slot in the pool stores many values and is exposed as a single method to save gas when accessed externally.</p>
+
+<p><img src="https://lh4.googleusercontent.com/wdmZhOXk764jC3giGsNOFlkC4oPMuJgqDVpBkUpDbO-vcDgQxIMGkZQsI1AZsIRRH5yLDANtl-mBuJOJNexUwDaiuxGz3f0HShEyXqNlycpzMqyf1vWWLo6o1nLRcVF30W2fyHKe" alt="Uniswap v3: Code block for initialize function" /></p>
+
+<p>Code block for initialize function</p>
+
+<p>The function <em>mint</em> is used to <strong>add liquidity</strong> in a position.</p>
+
+<p><img src="https://lh4.googleusercontent.com/LRlnqESPWFRokkKfqyb00kUz8gaGmhDh3RXhoSLxNGmHJd_iVNpV3VsT7-RVvw1Flunv3b5pJFO5WMEF9-1ZFRkb1IOmlCpPWKy8VdtQ65iP0LqwlQJGjPm5q3r20kCXki5EJkl6" alt="Uniswap v3: code block for mint function" /></p>
+
+<p>Code block for mint function</p>
+
+<p>This function adds liquidity for the recipient in specified positions. This function takes the address for which liquidity is being added, the upper and lower ticks (i.e. boundary of a position), the amount of liquidity to mint, data (if any), and returns token0 and token1 given to mint the amount of liquidity. </p>
+
+<p>The caller of this method receives a callback because of IUniswapV3MintCallback’s function uniswapV3MintCallback implemented in this function. They must pay any token0 or token1 owed for the liquidity.</p>
+
+<p>In contrast, to burn a token ID, which will delete it from the NFT contract, the function <em>burn</em> is used. But, the token must have 0 liquidity, and LPs must first collect all tokens.</p>
+
+<p>Liquidity providers can collect the tokens that the protocol owes them. Tokens may be owed for providing liquidity or by burning liquidity. Recipients (LPs) use the <em>collect</em> function for this.</p>
+
+<p><img src="https://lh3.googleusercontent.com/AVlyYUwVOQFUAfe8WiENGs9QpM586zh_Ngq5xl2-lP6tzNuKHw-zyq6JOAo2DTk-fTqHnRgUOM8Lma0Iq5LC5LdekUmsUqb631Jp081XOtqdCxfvwBToNlbz94lykLbi6u4S-2Vs" alt="Uniswap v3: Code block for collect function (Core contract)" /></p>
+
+<p>Code block for collect function (Core contract)</p>
+
+<p>This function takes the recipient, the upper and lower ticks, and the amount of tokens 0 and/or 1 they want to collect the fee in. If they want to collect a fee in any one of the tokens, they may provide zero as the value in amount0Requested/amount1Requested.</p>
+
+<p>LPs may <strong>burn their liquidity</strong> by using the burn function. </p>
+
+<p><img src="https://lh3.googleusercontent.com/9Lps-crcQDbZmCbOAvEFVchBujrT-bkpVZW25X35Gs3zw6VIIbBav6k8xmPf-85lox-mokmgu_B6uAqV5ul9cMXKWuZBVVKYw2LEuVEGO6KTLHtfTbawr6Fk1RuT4A6nXkgZj0xi" alt="Uniswap v3: Code block for burn function" /></p>
+
+<p>Code block for burn function</p>
+
+<p><em>Burn</em> functions take the position boundaries, i.e. tick upper and tick lower, and the amount of liquidity to be burnt as input and adds the token amount to the tokensOwed. </p>
+
+<p>The function which executes the main swapping feature is <a href="https://github.com/Uniswap/uniswap-v3-core/blob/f03155670ec1667406b83a539e23dcccf32a03bc/contracts/UniswapV3Pool.sol#L512"><em>the swap function</em></a><em>.</em></p>
+
+<p><img src="https://lh5.googleusercontent.com/z9vgyiSaeg52Z_54lRXkZihXdP7e95fKEyO-PhOURm4f6KRtbMz8D3s5f-xqltxjprCe9WO7oP7ObY73O6J12eL7mivfOKyGEV8jvUjYA3aFip4lUTtsuAEJxLzWlIVcd9hRmdVJ" alt="Uniswap v3: Code block for swap function" /></p>
+
+<p>Code block for swap function</p>
+
+<p><em>Swap function</em> takes the address of the swapper (recipient), The direction of the swap, true for token0 to token1, false for token1 to token0 (zeroForOne), the amount of the swap, which implicitly configures the amount as exact input and output (amountSpecified), the value for input will be positive while negative for output.</p>
+
+<p>The function is the only function with a loop. This while loop enables swapping as long as we haven’t swapped all of the tokens and haven’t reached the price limit. While executing a trade, we specify the limit for price. The token cannot exceed this price limit.</p>
+
+<p><img src="https://lh3.googleusercontent.com/fgMhV0PPc0w1hgFY7iuiLXiUHgo4Y8w8MeKhnZM7JmXOSvc_Vc1fQdYM2pLzYfIqx5E3zxhYsYdT2fzgdo7azFOmo6NlqLOQ4_QjRaFwlbyRrD9gpJmxIwk-JpPgS66hIw6LAMZW" alt="Code block inside swap function" /></p>
+
+<p>Code block inside swap function</p>
+
+<p>Calculates the protocol fee, if any.</p>
+
+<p><img src="https://lh4.googleusercontent.com/DLIZPgpJe22MbBdMJzFm6woNVL7YEDIJuOyp7j328mCRQfurEdX63EV168ao5EtHdxXos00QSWFzUx33cR5guxDgiQsIAN3Dl-rFgUiYkc7tar2jmm3aX9G2M3HOUDudLnqIztnJ" alt="Code block for protocol fee inside swap function" /></p>
+
+<p>Code block for protocol fee inside swap function</p>
+
+<p>The change in liquidity is already discussed in section 3.1, which is also part of the swap function. </p>
+
+<p>To execute flashSwaps, Uniswap v3 uses a separate function named flash, unlike Uniswap v2.</p>
+
+<p><img src="https://lh6.googleusercontent.com/D6coexzH1-hByc3DyW6_LBmP_VVUpb6wBMgoQD-wVFjbApqepAvIUST8WsPIjmOrp3lTLWzANt9APHGqUYHXSSzKepzwWCePneiyQwyHhuc7ptoOi8GjmasGhiy5YOmOPyFSBpB7" alt="Code block for swap function" /></p>
+
+<p>Code block for swap function</p>
+
+<p>Recipients may receive token0 or token1 or both, but they must pay the received amount plus fee (per reserves loaned) in the same atomic transaction. The recipient must implement the IUniswapV3FlashCallback interface and its function uniswapV3FlashCallback to execute a flashSwap. </p>
+
+<h3 id="uniswap-v3-periphery">Uniswap v3 Periphery:</h3>
+
+<p>The <a href="http://nonfungiblepositionmanager/">NonfungiblePositionManager contract</a> wraps Uniswap v3 positions in ERC-721 non-fungible interface, allowing them to be transferred and authorized.</p>
+
+<p>To create a new position wrapped in an NFT, the function mint (this is different from the core contract’s mint) is used. This function is to be called when the pool exists and is initialized. If the pool is created but not initialized, a method does not exist, which means the pool is assumed to be initialized.</p>
+
+<p>As we know, LPs can increase the amount of liquidity that they provide. The <em>increaseLiquidity</em> function is to be used for that. </p>
+
+<p>It increases the amount of liquidity in a position, with tokens paid by the `msg.sender`.</p>
+
+<p><img src="https://lh3.googleusercontent.com/jmxO6vvrYM7xZJt_6c2r6lYdFzyQ39wLlm8bgyFKXzBkkdnQL3U-riwOdjIQGqTsQW6phHvpFRGlT_VHlj0SR55xlD8qO7nMxBxDlTmidbndOyEhCKCfUNywXSUiLbs2BpPcRc8c" alt="Code block for increaseLiquidity function" /></p>
+
+<p>Code block for increaseLiquidity function</p>
+
+<p>This function takes the ID of the token for which liquidity is being increased (tokenId), the amount by which liquidity will be increased (amount), the maximum amount of token0 that should be paid to (amount0Max), the maximum amount of token1 that should be (amount1Max), and the time by which the transaction must be included to affect the change (deadline).</p>
+
+<p><img src="https://lh5.googleusercontent.com/0yvH_S98UVsb0JdCj7bDYj9nZjBLPSFQQcF_38vqX1b_QSVGmJbT1GQeVq50AEPU53-pH6pEjT6VhL7nTDR0c7-S-dc47iQ7ppB66s67STJ7NWyHFmfD3auar4iTuWEDkN1uGYcX" alt="Code block for decreaseLiquidity function" /></p>
+
+<p>Code block for decreaseLiquidity function</p>
+
+<p>The <em>decreaseLiquidity</em> function takes the same inputs as the i_ncreaseLiquidity_ function. Still, unlike increaseLiquidity, it decreases the amount of liquidity in a position. In contrast, inceaseLiquidity increases the amount of liquidity in a position, and then both functions account for the changes to the position.</p>
+
+<p>We also have the <em>collect function</em>, which calls and uses the collect function of Uniswap v3 Core’s pool smart contract. However, this collect function updates the liquidity and position in the NFT as well.</p>
+
+<p><img src="https://lh6.googleusercontent.com/BP0dgWIEjpfbJrLppTqJynILzVjR00ebPvYLA8HGa5pd0AZxBeLaPGKNfzk2qTBl7FWHWOiFnZ3zTh2Du2D0zAYQiUw-T63b-MvT0sQM9D3cpIsCVASkIwISkL5xo_WU4uBitcdv" alt="Code block for collect function (Periphery contract)" /></p>
+
+<p>Code block for collect function (Periphery contract)</p>
+
+<p>The <a href="https://github.com/Uniswap/uniswap-v3-periphery/blob/main/contracts/SwapRouter.sol">SwapRouter contract</a> routes the swaps against Uniswap v3 and contains functions for swapping tokens.</p>
+
+<p><img src="https://lh5.googleusercontent.com/5IbtCLZZ6M52g_czoFiP53kvC4HmjDKfuBCDb0Cg3MHMdjuSclP_Z-NFOYwIDWgZxag8K6eOuKdi6qvcQudwYemy66dp4th7gVZgHw4VNQM1e9aTyM55DsN0xAcHbdMcypThsjkr" alt="Code block to execute swap along a specified path" /></p>
+
+<p>Code block to execute swap along a specified path</p>
+
+<p>The function executes the swap along a specified path. AmountOut from a reserve is amountIn for the next reserve along the path, the while loop ensures the looping over the specified path.</p>
+
+<h2 id="glossary">Glossary</h2>
+
+<ul>
+  <li><strong>Capital Inefficiency:</strong> The ratio between spent amount and return amount.</li>
+  <li><strong>Liquidity Depth:</strong> The amount of tokens that exist in the circulating supply.</li>
+  <li><strong>Concentrated Liquidity:</strong> Liquidity Bounded within some price range.</li>
+  <li><strong>CFMM (constant function market makers):</strong> Any trade must change the reserves in such a way that the product of those reserves remains unchanged (i.e. equal to a constant).</li>
+  <li><strong>Position:</strong> Liquidity concentrated to a finite range.</li>
+  <li><strong>LPs:</strong> Liquidity providers.</li>
+  <li><strong>Flash Swaps:</strong> Uniswap’s flash swaps allow withdrawing up to the full reserves of any ERC20 token on Uniswap and execute arbitrary logic at no upfront cost. But, you either pay for the withdrawn ERC20 tokens with the corresponding pair tokens or return the withdrawn ERC20 tokens along with a small fee in the same transaction.</li>
+</ul>
+
+<h2 id="references">References:</h2>
+
+<ul>
+  <li><a href="https://uniswap.org/whitepaper-v3.pdf">https://uniswap.org/whitepaper-v3.pdf</a></li>
+  <li><a href="https://uniswap.org/blog/uniswap-v3/">https://uniswap.org/blog/uniswap-v3/</a></li>
+  <li><a href="https://github.com/Uniswap/uniswap-v3-core">https://github.com/Uniswap/uniswap-v3-core</a></li>
+  <li><a href="https://github.com/Uniswap/uniswap-v3-periphery">https://github.com/Uniswap/uniswap-v3-periphery</a></li>
+  <li><a href="https://docs.uniswap.org/">https://docs.uniswap.org/</a></li>
+</ul>
+
+<p><img src="https://xord.com/wp-content/uploads/2022/02/blockzero-logo-png.png" alt="" /></p>
+
+
+        <!-- Post Pager -->
+        <div>
+          <hr style="visibility: hidden" />
+          <ul class="pager"><li class="previous">
+              <a
+                href="/pages/manifoldfinance/primitives/automated-detection-of-dynamic-state"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Automated Detection Of Dynamic State"
+              >
+                Previous<br />
+                <span>Automated Detection Of Dynamic State</span>
+              </a>
+            </li><li class="next">
+              <a
+                href="/pages/manifoldfinance/primitives/mev-and-folks-theorem"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Is Folk's theorem the Blockchain's nightmare"
+              >
+                Next<br />
+                <span>Is Folk's theorem the Blockchain's nightmare</span>
+              </a>
+            </li></ul>
+          <hr style="visibility: hidden" />
+        </div></div><!-- Side Catalog Container -->
+      <div
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container"
+      >
+        <div class="side-catalog">
+          <hr class="hidden-sm hidden-xs" />
+          <h5>
+            <a class="catalog-toggle" href="#">CATALOG</a>
+          </h5>
+          <ul class="catalog-body"></ul>
+        </div>
+      </div><!-- Sidebar Container -->
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container"
+      ><!-- Featured Tags -->
+<section><hr class="hidden-sm hidden-xs"><h5>
+        <a href="/pages/manifoldfinance/primitives/archive/">FEATURED TAGS</a>
+    </h5>
+    <div class="tags"><a data-sort="0014"
+            href="/pages/manifoldfinance/primitives/archive/?tag=distributed+computing"
+            title="distributed computing"
+            rel="3">distributed computing</a><a data-sort="0014"
+            href="/pages/manifoldfinance/primitives/archive/?tag=ethereum"
+            title="ethereum"
+            rel="3">ethereum</a><a data-sort="0015"
+            href="/pages/manifoldfinance/primitives/archive/?tag=blockchain"
+            title="blockchain"
+            rel="2">blockchain</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=DAO"
+            title="DAO"
+            rel="1">DAO</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=Jekyll"
+            title="Jekyll"
+            rel="1">Jekyll</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=Markdown"
+            title="Markdown"
+            rel="1">Markdown</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=amm"
+            title="amm"
+            rel="1">amm</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=analysis"
+            title="analysis"
+            rel="1">analysis</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=client+development"
+            title="client development"
+            rel="1">client development</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=dao"
+            title="dao"
+            rel="1">dao</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=devops"
+            title="devops"
+            rel="1">devops</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=gitops"
+            title="gitops"
+            rel="1">gitops</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=governance"
+            title="governance"
+            rel="1">governance</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=json+rpc"
+            title="json rpc"
+            rel="1">json rpc</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=nix"
+            title="nix"
+            rel="1">nix</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=protocol"
+            title="protocol"
+            rel="1">protocol</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=routing"
+            title="routing"
+            rel="1">routing</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=sushiswap"
+            title="sushiswap"
+            rel="1">sushiswap</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=tooling"
+            title="tooling"
+            rel="1">tooling</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=trading"
+            title="trading"
+            rel="1">trading</a>
+    </div>
+</section>
+</div>
+    </div>
+  </div>
+</article>
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><!-- SNS -->
+<ul class="list-inline text-center">
+  
+  <li>
+    <a href="/pages/manifoldfinance/primitives/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li><li>
+    <a target="_blank" href="mailto:sam@manifoldfinance.com">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li><li>
+    <a target="_blank" href="https://github.com/manifoldfinance">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fab fa-github fa-stack-2x"></i>
+      </span>
+    </a>
+  </li><li>
+    <a href="https://twitter.com/foldfinance">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li></ul>
+<p class="copyright text-muted">See
+          <a href="https://github.com/sambacha"></a> @sambacha | &copy; 2022-2024 manifoldfinance
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+  crossorigin="anonymous"
+></script>
+
+<!-- Bootstrap JavaScript-->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+  integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+  crossorigin="anonymous"
+></script>
+
+<!-- Simple Jekyll Search -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.7.12/simple-jekyll-search.min.js"
+  integrity="sha512-APy7Ff/y4pdIHleqiTMcRZ8Wu6tjfqhJpgAcaCvTuFQPj/G+/A5u0uZi/DkfkuLQ6FeFmDJgh/zl0y3If/VUyA=="
+  crossorigin="anonymous"
+></script>
+
+<!-- MathJax https://github.com/mathjax/MathJax/issues/2220 -->
+<script>
+  MathJax = {
+    options: {
+      renderActions: {
+        /* add a new named action not to override the original 'find' action */
+        find_script_mathtex: [
+          10,
+          function (doc) {
+            for (const node of document.querySelectorAll(
+              'script[type^="math/tex"]',
+            )) {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(
+                node.textContent,
+                doc.inputJax[0],
+                display,
+              );
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = { node: text, delim: '', n: 0 };
+              math.end = { node: text, delim: '', n: 0 };
+              doc.math.push(math);
+            }
+          },
+          '',
+        ],
+      },
+    },
+  };
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.5/es5/tex-chtml.js"
+  integrity="sha512-WIPUeuVusAT6dUtN6xKArYCBEa76ltyvaz3ltvQd+dy7ISdGJv1Y3y7eDBEF986YfNtmZGLdAaEBSgeBb+8OSg=="
+  crossorigin="anonymous"
+></script>
+
+<!-- Async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          c(null, e);
+        },
+        false,
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script><!-- AnchorJS -->
+<script>
+  async(
+    'https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js',
+    function () {
+      anchors.options = {
+        visible: 'hover',
+      };
+      anchors
+        .add()
+        .remove('.intro-header h1')
+        .remove('.subheading')
+        .remove('.sidebar-container h5');
+    },
+  );
+</script><!-- Custom JavaScript -->
+<script src="/pages/manifoldfinance/primitives/assets/js/main.js"></script><!-- Side Catalog -->
+<script src="/pages/manifoldfinance/primitives/assets/js/catalog.js"></script></body>
+</html>

@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Differential Dataflow Pt1 | Primitives</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Differential Dataflow Pt1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Differential dataflow roadmap" />
+<meta property="og:description" content="Differential dataflow roadmap" />
+<link rel="canonical" href="https://github.com/pages/manifoldfinance/primitives/differential-dataflow-pt1" />
+<meta property="og:url" content="https://github.com/pages/manifoldfinance/primitives/differential-dataflow-pt1" />
+<meta property="og:site_name" content="Primitives" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-10T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Differential Dataflow Pt1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-10-10T00:00:00-07:00","datePublished":"2022-10-10T00:00:00-07:00","description":"Differential dataflow roadmap","headline":"Differential Dataflow Pt1","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/pages/manifoldfinance/primitives/differential-dataflow-pt1"},"url":"https://github.com/pages/manifoldfinance/primitives/differential-dataflow-pt1"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://github.com/pages/manifoldfinance/primitives/feed.xml" title="Primitives" /><!-- Emoji Favicon  -->
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎄</text></svg>"
+  />
+  <!-- <link rel="shortcut icon" href="/pages/manifoldfinance/primitives/favicon.ico"> -->
+
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+    crossorigin="anonymous"
+  />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/pages/manifoldfinance/primitives/assets/css/main.min.css" />
+</head>
+<body><!-- Navigation -->
+<nav
+  class="navbar navbar-default navbar-custom navbar-fixed-top invert"
+>
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+      <a class="navbar-brand" href="/pages/manifoldfinance/primitives/">Primitives</a>
+      <button class="navbar-toggle" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div id="huxblog_navbar">
+      <div class="navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/pages/manifoldfinance/primitives/">Home</a>
+          </li><li>
+            <a href="/pages/manifoldfinance/primitives/about">About</a>
+          </li><li>
+            <a href="/pages/manifoldfinance/primitives/archive">Archive</a>
+          </li><li class="search-icon">
+            <a href="javascript:void(0)">
+              <i class="fas fa-search"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fas fa-chevron-down"></i>
+    </span>
+  </div>
+
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form>
+          <input type="text" id="search-input" placeholder="$ grep..." />
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Post Header --><header
+  class="intro-header style-text"
+>
+  <div class="header-mask"></div><div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <div class="tags"></div>
+          <h1>Differential Dataflow Pt1</h1>
+          <h2 class="subheading"></h2>
+          <span class="meta"
+            >Posted by manifoldfinance on October 10, 2022</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header><!-- Post Content -->
+<style>
+  /* Place left on bigger screen */
+  @media all and (min-width: 800px) {
+    .anchorjs-link {
+      position: absolute;
+      left: -0.75em;
+      font-size: 1.1em;
+      margin-top: 0.1em;
+    }
+  }
+</style>
+<article>
+  <div class="container">
+    <div class="row">
+      <!-- Post Container -->
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"
+      ><h1 id="differential-dataflow-roadmap">Differential dataflow roadmap</h1>
+
+<blockquote>
+  <p>source https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md</p>
+</blockquote>
+
+<p>I’m going to take this post to try and outline what I think is an important
+direction for differential dataflow, and to explain how to start moving in this
+direction. I think I have a handle on most of the path, but talking things out
+and explaining them, with examples and data and such, makes me a lot more
+comfortable before just writing a lot of code.</p>
+
+<p>The main goal is to support “high resolution” updates to input streams. Right
+now, updates to differential dataflow come in batches, and get relatively decent
+scaling as long as the batches are not small. While you can cut the size of
+batches to improve resolution, increasing the number of workers no longer
+improve performance.</p>
+
+<p>It would be <em>great</em>, and this write-up is meant to be a first step, to be able
+to have input updates timestamped with the nanosecond of their arrival and the
+corresponding output updates with the same resolution, while still maintaining
+the throughput you would expect for large batch updates.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>Let’s start with a simple-ish, motivating problem to explain what is missing. We
+can also use it to evaluate our progress (none yet!), and possibly to tell us
+when we are done.</p>
+
+<p>Imagine you are performing reachability queries, an iterative Datalog-style
+computation, over dynamic graph data from user-specified starting locations. The
+computation is relatively simply written:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="c1">// two inputs, one for roots, one for edges.</span>
+<span class="k">let</span> <span class="p">(</span><span class="n">root_input</span><span class="p">,</span> <span class="n">roots</span><span class="p">)</span> <span class="o">=</span> <span class="n">scope</span><span class="nf">.new_input</span><span class="p">();</span>
+<span class="k">let</span> <span class="p">(</span><span class="n">edge_input</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span> <span class="o">=</span> <span class="n">scope</span><span class="nf">.new_input</span><span class="p">();</span>
+
+<span class="c1">// iteratively expand set of (root, node) reachable pairs.</span>
+<span class="n">roots</span><span class="nf">.map</span><span class="p">(|</span><span class="n">root</span><span class="p">|</span> <span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">root</span><span class="p">))</span>
+     <span class="nf">.iterate</span><span class="p">(|</span><span class="n">reach</span><span class="p">|</span> <span class="p">{</span>
+
+   	     <span class="c1">// bring un-changing collections into loop.</span>
+   	     <span class="k">let</span> <span class="n">roots</span> <span class="o">=</span> <span class="n">edges</span><span class="nf">.enter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">reach</span><span class="nf">.scope</span><span class="p">());</span>
+         <span class="k">let</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">edges</span><span class="nf">.enter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">reach</span><span class="nf">.scope</span><span class="p">());</span>
+
+         <span class="c1">// join `reach` and `edges` on `node` field.</span>
+         <span class="n">reach</span><span class="nf">.map</span><span class="p">(|(</span><span class="n">root</span><span class="p">,</span> <span class="n">node</span><span class="p">)|</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">root</span><span class="p">))</span>
+       	      <span class="nf">.join_map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">edges</span><span class="p">,</span> <span class="p">|</span><span class="n">_node</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">dest</span><span class="p">|</span> <span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">dest</span><span class="p">))</span>
+       	      <span class="nf">.concat</span><span class="p">(</span><span class="o">&amp;</span><span class="n">roots</span><span class="p">)</span>
+       	      <span class="nf">.distinct</span><span class="p">()</span>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The result of this computation is a collection of pairs <code class="language-plaintext highlighter-rouge">(root, node)</code>
+corresponding to those elements <code class="language-plaintext highlighter-rouge">root</code> of <code class="language-plaintext highlighter-rouge">roots</code>, and those elements <code class="language-plaintext highlighter-rouge">node</code>
+they can reach transitively along elements in <code class="language-plaintext highlighter-rouge">edges</code>.</p>
+
+<p>Of course, the heart of differential dataflow lies in incrementally updating its
+computations. We are interested in what happens to this computation as the
+inputs <code class="language-plaintext highlighter-rouge">roots</code> and <code class="language-plaintext highlighter-rouge">edges</code> change. More specifically,</p>
+
+<ol>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">roots</code> collection may be updated by adding and removing root elements,
+which issue and cancel standing queries for reachable nodes, respectively.</p>
+  </li>
+  <li>
+    <p>The <code class="language-plaintext highlighter-rouge">edges</code> collection may be updated by adding and removing edge elements,
+which affect the reachable set of nodes from any of the elements of <code class="language-plaintext highlighter-rouge">roots</code>.</p>
+  </li>
+</ol>
+
+<p>Consider a version of this computation that runs “forever”, where the timestamp
+type is a <code class="language-plaintext highlighter-rouge">u64</code> indicating “nanosecond since something”. Each change that
+occurs, to <code class="language-plaintext highlighter-rouge">edges</code> or <code class="language-plaintext highlighter-rouge">roots</code> happens at a likely distinct nanosecond, and so we
+imagine many single-element updates to our computation. We don’t expect to
+actually process them within nanoseconds (would be great, but), but the
+nanoseconds units means that corresponding output updates also indicate the
+logical nanosecond at which the change happens.</p>
+
+<p>This isn’t difficult in differential dataflow: timely dataflow, on which it is
+built, does no work for epochs in which no data are exchanged, no matter how
+fine grained the measurement. We could use
+<a href="https://en.wikipedia.org/wiki/Planck_time">Planck time</a> if we wanted; our
+computation wouldn’t run any differently (it might overflow the 64 bit numbers
+sooner).</p>
+
+<p>But, this doesn’t mean we don’t have problems.</p>
+
+<h3 id="degradation-with-time">Degradation with time</h3>
+
+<p>For now, let’s put ten roots into <code class="language-plaintext highlighter-rouge">roots</code> and load up two million random edges
+between one million nodes. We are then going to repeatedly remove the oldest
+existing edge and introduce a new random edge in its place. This is a sliding
+window over an unbounded stream of random edges, two million elements wide.</p>
+
+<p>Our computation determines the reachable sets for our ten roots, and maintains
+them as we change the graph. How quickly does this happen? Here are some
+empirical cumulative density functions, computed by capturing the last 100
+latencies after each of 100, 1000, 10000, and 100000 updates have been
+processed.</p>
+
+<p><img src="https://github.com/frankmcsherry/blog/blob/master/assets/roadmap/gnp1m.png" alt="gnp1m" /></p>
+
+<p>This is all a bit of a tangle, but we see a fairly consistent shape for the
+first 100,000 updates. However, there is clearly some degradation that starts to
+happen. On the plus side, most of the latencies are still milliseconds at most,
+which is pretty speedy. Should we be happy?</p>
+
+<p>Let’s look at a slight variation on this experiment, where instead of millions
+of edges and nodes we use <em>thousands</em>. Yeah, smaller, by a lot. Same deal as
+above, latencies at 100, 1000, 10000, and … urg.</p>
+
+<p><img src="https://github.com/frankmcsherry/blog/blob/master/assets/roadmap/gnp1k.png" alt="gnp1k" /></p>
+
+<p>These curves are very different from the curves above. I couldn’t compute the
+100,000 update measurement because it took so long.</p>
+
+<h4 id="whats-going-on">What’s going on?</h4>
+
+<p>Differential dataflow’s internal data structures are append-only, and over the
+course of 10,000 updates we are dumping a large number of updates <em>relative to
+the number of nodes</em>. Back when we had one million nodes, doing 100,000 updates
+wasn’t such a big deal because on average each node got just a few (multiply by
+ten, because of the roots!). With only 1,000 nodes, all of those updates are
+being forced onto far fewer nodes, which mean that each node has a much more
+complicated history. Unfortunately, to determine what state a node is currently
+in, at any point in the computation, we need to examine all of its history.</p>
+
+<p>As the number of updates for each key increases, the amount of work we have to
+do for each key increases.</p>
+
+<h3 id="resolution-and-scaling">Resolution and scaling</h3>
+
+<p>How about we try to speed things up by adding more workers? Perhaps
+unsurprisingly, with single-element updates, multiple workers do not really help
+out. At least, the way the code is written at the moment, all the workers chill
+out waiting for that single update to get sorted out before moving on to the
+next update. As there is only a small amount of work to do, most workers sit on
+their hands instead of do productive work.</p>
+
+<p>Let’s evaluate this, plus alternatives we might have hoped for. We are going to
+do single element updates 10,000 times to the two million edge graph, but we
+will also do 10 element updates 1,000 times, and 100 element updates 100 times.
+We are doing the same set of updates, just in coarser granularities, leading to
+lower resolution outputs.</p>
+
+<p><img src="https://github.com/frankmcsherry/blog/blob/master/assets/roadmap/batching.png" alt="batching" /></p>
+
+<p>The plot above shows solid lines for single-threaded execution and dashed lines
+for two-threaded execution. When we have the single-element updates, the solid
+line is better than the dashed line (one worker is better than two). When we
+have hundred-element updates, the dashed line is better than the solid line (two
+workers are better than one). As the amount of work in each batch increases, the
+second worker can more productively contribute.</p>
+
+<p>While we can eyeball the latencies and see some trends, what are the actual
+throughputs for each of these configurations?</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">batch size</th>
+      <th style="text-align: right">one worker</th>
+      <th style="text-align: right">two workers</th>
+      <th style="text-align: right">increase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">1</td>
+      <td style="text-align: right">1244.96/s</td>
+      <td style="text-align: right">1297.07/s</td>
+      <td style="text-align: right">1.042x</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">10</td>
+      <td style="text-align: right">1988.71/s</td>
+      <td style="text-align: right">2530.23/s</td>
+      <td style="text-align: right">1.272x</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">100</td>
+      <td style="text-align: right">1563.32/s</td>
+      <td style="text-align: right">2743.31/s</td>
+      <td style="text-align: right">1.755x</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Something good seemed to happen for one worker batch size 10 that doesn’t happen
+to batch size 100; I’m not sure what that is about. But, we see that the second
+worker helps more and more with increasing batch sizes. We don’t get 2x
+improvement, which is partly due to the introduction of data exchange going from
+one to two workers (no data shuffling happens for one worker).</p>
+
+<h4 id="whats-going-on-1">What’s going on?</h4>
+
+<p>This isn’t too mysterious: processing single elements at a time and asking all
+workers to remain idle until each is finished leaves a lot of cycles on the
+table. At the same time, lumping lots of updates together improves the
+utilization and allows more workers to reduce the total time to process, but
+comes at the cost of resolution: we can’t see which of the 100 updates had which
+effect.</p>
+
+<p>We would love to get the resolution of single-element updates with the
+throughput scaling of the batched updates, if at all possible. We’d also like
+the <em>latency</em> of the single-element updates, but note that this is not the same
+thing as either resolution or throughput.</p>
+
+<ul>
+  <li>
+    <p><strong>Resolution</strong> is important for correctness; we can’t alter the resolution of
+inputs and outputs without changing the definition of the computation itself.</p>
+  </li>
+  <li>
+    <p><strong>Throughput</strong> is the rate of changes we can accommodate without falling over.
+We want this to be as large as possible, ideally scaling with the number of
+workers, so that we can handle more updates per unit time.</p>
+  </li>
+  <li>
+    <p><strong>Latency</strong> is the time to respond to an input update with its corresponding
+output update. The lower the latency the better, but this fights a little
+against throughput.</p>
+  </li>
+</ul>
+
+<p>At the moment, single-element updates focus on latency; workers do nothing
+except attend to the most recent single update. Getting great latency would be
+excellent, but if it comes at the cost of throughput we might want a different
+trade-off.</p>
+
+<h3 id="goals">Goals</h3>
+
+<p>The intent of this write-up is to investigate these problems in more detail,
+propose some solutions, and (importantly, for me) come up with a framework for
+evaluating the results. There is a saying that “you can’t manage what you don’t
+measure”, one corrolary of which is that I’m not personally too motivated to
+work hard on code until I have a benchmark for it. With that in mind, here are
+two benchmarks that (i) are important, (ii) currently suck, and (iii) could be a
+lot better:</p>
+
+<ol>
+  <li>
+    <p><strong>Sustained latency:</strong> For windowed computations (or those with bounded
+inputs, generally), the latency distribution should stabilize with time. The
+latency distribution for 1,000 node 2,000 edge reachability computations
+after one million updates should be pretty much the same as the distribution
+after one thousand updates. Minimize the difference, and report only the
+former.</p>
+  </li>
+  <li>
+    <p><strong>Single-update throughput scaling:</strong> The throughput of single-element
+updates should improve with multiple workers (up to a point). The
+single-update throughput for 1,000 node 2,000 edge reachability computations
+should scale nearly linearly with (a few) workers. Maximize the throughput,
+reporting single-element updates per second per worker.</p>
+  </li>
+</ol>
+
+<p>These aren’t really grand challenges or anything, especially as I think I know
+how to do them already, but goal setting is an important part of getting things
+done.</p>
+
+<h2 id="the-problems">The problems</h2>
+
+<p>There are two main problems that we are going to want to re-work bits of
+differential dataflow to fix. There are also some secondary “constraints”, which
+are currently non-issues but which we could break if we try and be too clever.</p>
+
+<p>To give you a heads up, and to let you skip around, the problems (with links!)
+are:</p>
+
+<ul>
+  <li>
+    <p><strong><a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#problem-0-data-structures-for-high-resolution-times">Problem 0: Data structures for high-resolution times</a></strong>
+The data structure differential dataflow currently uses to store collection
+data isn’t great for high resolution times, even ignoring the more subtle
+performance issues. It works, but it doesn’t expect large numbers of times and
+should be reconsidered.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#problem-1-unbounded-increase-in-latency">Problem 1: Unbounded increase in latency</a></strong>
+As the computation proceeds, the latencies increase without bound. This is
+because we keep appending in state, and the amount that must be considered to
+evaluate the current configuration grows without bound.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#problem-2-poor-scaling-with-small-updates">Problem 2: Poor scaling with small updates</a></strong>
+As we increase the number of workers, we do not get increased throughput
+without also increasing the sizes of batches of input we process. Increases in
+performance come at the cost of more granular updates.</p>
+  </li>
+</ul>
+
+<p>There are some constraints that are currently in place, and we will go through
+them to remember what is hard and annoying about just typing these things in.</p>
+
+<ul>
+  <li>
+    <p><strong><a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#constraint-1-compact-representation-in-memory">Constraint 1: Compact representation in memory</a></strong>
+The representation of a trace should not be so large that I can’t fit normal
+graphs in memory on my laptop. Ideally the memory footprint should be not much
+larger than required to write the data on disk.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#constraint-2-shared-index-structures-between-operators">Constraint 2: Shared index structures between operators</a></strong>
+Index structures are currently shared between operators, so that a collection
+only needs to be indexed and maintained once per computation, for each key on
+which it is indexed.</p>
+  </li>
+</ul>
+
+<h3 id="problem-0-data-structures-for-high-resolution-times">Problem 0: Data structures for high-resolution times</h3>
+
+<p>Each differential dataflow collection is described by a bunch of tuples, each of
+which reflect a change described by three things:</p>
+
+<ul>
+  <li>
+    <p><strong>Data:</strong> Each change that occurs relates to some data. Typically these are
+<code class="language-plaintext highlighter-rouge">(key, val)</code> pairs, but they could also just be <code class="language-plaintext highlighter-rouge">key</code> records, or they could
+be even more complicated.</p>
+  </li>
+  <li>
+    <p><strong>Time:</strong> Each change occurs at some logical time. In the simplest case each
+is just an integer indicating which round the change happens in, but it can be
+more complex and is generally only known to be an element from a partially
+ordered set.</p>
+  </li>
+  <li>
+    <p><strong>Delta:</strong> Each change has a signed integer change to the frequency of the
+element, indicating whether the change adds an element or removes an element.</p>
+  </li>
+</ul>
+
+<p>This collection of <code class="language-plaintext highlighter-rouge">(data, time, delta)</code> tuples needs to be maintained in a form
+that allows relatively efficient enumeration of the history of individual data
+records: those <code class="language-plaintext highlighter-rouge">(data, time, delta)</code> tuples matching <code class="language-plaintext highlighter-rouge">data</code>.</p>
+
+<p>Differential dataflow currently maintains its tuples ordered first by <code class="language-plaintext highlighter-rouge">key</code>,
+then by <code class="language-plaintext highlighter-rouge">time</code>, and then by <code class="language-plaintext highlighter-rouge">val</code>. This makes some sense if you imagine that
+many changes to <code class="language-plaintext highlighter-rouge">key</code> occur at the same time, as you can perform per-<code class="language-plaintext highlighter-rouge">time</code>
+logic once per distinct time. In batch-iterative computation, where there is
+just one input and relatively few iterations, this is a reasonable assumption.
+It is less reasonable for high-resolution times.</p>
+
+<p>Ideally, we would define an interface for the storage layer, so that operators
+can be backed by data structures appropriate for high-resolution times, or for
+batch data as appropriate. Let’s describe what interface the storage should
+provide, somewhat abstractly:</p>
+
+<ol>
+  <li>
+    <p>Accept batches of updates, <code class="language-plaintext highlighter-rouge">(data, time, delta)</code>.</p>
+
+    <p>This is perhaps obvious, but without this we don’t really have a problem.
+Importantly, we should be able to submit <em>batches</em> of updates corresponding
+to multiple <code class="language-plaintext highlighter-rouge">data</code> and multiple <code class="language-plaintext highlighter-rouge">time</code> entries. The batch interface
+communicates that the data structure doesn’t need to be in an indexable state
+for each element, only once it accepts the batch.</p>
+  </li>
+  <li>
+    <p>Enumerate those <code class="language-plaintext highlighter-rouge">data</code> associated with a <code class="language-plaintext highlighter-rouge">key</code>.</p>
+
+    <p>Many operators (e.g. <code class="language-plaintext highlighter-rouge">join</code> and <code class="language-plaintext highlighter-rouge">group</code>) drive computation by <code class="language-plaintext highlighter-rouge">key</code> keys and
+their associated <code class="language-plaintext highlighter-rouge">val</code> values. One should be able to enumerate values
+associated with a key, preferably supporting some sort of navigation (e.g.
+searching for values).</p>
+  </li>
+  <li>
+    <p>Report the history <code class="language-plaintext highlighter-rouge">(time, delta)</code> for each <code class="language-plaintext highlighter-rouge">data</code>.</p>
+
+    <p>The history of <code class="language-plaintext highlighter-rouge">data</code> is used by many operators to determine (i) the
+cumulative weight at any other <code class="language-plaintext highlighter-rouge">time</code>, (ii) which times are associated with a
+<code class="language-plaintext highlighter-rouge">key</code>, which drives when user-defined logic needs to be re-run.</p>
+  </li>
+</ol>
+
+<p><a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#constraint-1-compact-representation-in-memory">Constraint #1</a>
+makes life a little difficult for random access, navigation, and mutation, as
+these usually fight with compactness. Perhaps less obviously,
+<a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#constraint-2-shared-index-structures-between-operators">Constraint #2</a>
+complicates in-place updating, because multiple readers may share read access to
+the same hunk of memory, and something needs to stay true about it.</p>
+
+<h4 id="a-proposal">A proposal</h4>
+
+<p>My best plan for the moment is something like a log-structure merge trie, which
+probably isn’t an existing term, but let me explain:</p>
+
+<ol>
+  <li>
+    <p>We maintain several immutable collections of <code class="language-plaintext highlighter-rouge">((key, val), time, delta)</code>
+tuples, of geometrically decreasing size. When we add new collections,
+corresponding to an inserted batch, we merge any collections whose sizes are
+within a factor of two, amortizing the merge effort over subsequent
+insertions.</p>
+  </li>
+  <li>
+    <p>Each of the <code class="language-plaintext highlighter-rouge">((key, val), time, delta)</code> collections is represented as a trie,
+with three vectors corresponding to “keys and the offsets of their values”,
+“values and the offsets of their history”, and “histories”:</p>
+
+    <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">struct</span> <span class="n">Trie</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+	<span class="n">keys</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="nb">usize</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>		<span class="c1">// key and offset into self.values</span>
+	<span class="n">values</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="nb">usize</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>	<span class="c1">// val and offset into self.histories</span>
+	<span class="n">histories</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="nb">isize</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>	<span class="c1">// bunch of times and deltas</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Adding new batches of data is standard; this type of data structure is meant to
+be efficient at writing, with the main (only?) cost being the merging. As the
+collections are immutable, this can happen in the background, but needs to
+happen at a sufficient rate to avoid falling behind. However, merging feels like
+a relatively high-throughput operation compared to a large amount of random
+access (computation) that will come with each inserted element. Said
+differently, we only merge in data involved in computation, so we shouldn’t be
+doing more writes than reads.</p>
+
+<p>Reading data out requires indexing into each of the tries to find a target key.
+One could look into each of the tries for the key, using something like binary
+search, or a galloping cursor (as most operators process keys in some known
+order). Another option is to maintain an index for keys, indicating for each the
+lowest level (smallest) trie in which the key exists and the key’s offset in
+that trie’s <code class="language-plaintext highlighter-rouge">keys</code> field. With each <code class="language-plaintext highlighter-rouge">(K, usize)</code> pair, we could store again an
+index of the next-lowest level trie in which the key exists and the key’s offset
+there.</p>
+
+<p>This allows us to find the keys and their tries with one index look-up and as
+many pointer jumps as trie levels in which the key exists. Adding and merging
+tries only requires updating the index for involved keys, and does not require
+rewriting anything in existing trie layers.</p>
+
+<p>Here is a sketch of the involved structures:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">struct</span> <span class="n">Storage</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+	<span class="n">index</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="n">KeyLoc</span><span class="o">&gt;</span><span class="p">,</span>	<span class="c1">// something better, ideally</span>
+	<span class="n">tries</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Trie</span><span class="o">&lt;</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">,</span>		<span class="c1">// tries of decreasing size</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">KeyLoc</span> <span class="p">{</span>
+	<span class="n">level</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span>				<span class="c1">// trie level</span>
+	<span class="n">index</span><span class="p">:</span> <span class="nb">usize</span><span class="p">,</span>				<span class="c1">// index into trie.keys</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">Trie</span><span class="o">&lt;</span><span class="n">V</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+	<span class="n">keys</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">usizes</span><span class="p">,</span> <span class="n">KeyLoc</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>	<span class="c1">// key, offset into self.values, next key location</span>
+	<span class="n">values</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="nb">usize</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>		<span class="c1">// val and offset into self.histories</span>
+	<span class="n">histories</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="nb">isize</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>		<span class="c1">// bunch of times and deltas</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I think this design makes a good deal of sense in principle, but it remains to
+see how it will work out in practice. On the plus side, it doesn’t seem all that
+complicated at this point, so trying it out shouldn’t be terrifying. Also, I’m
+much happier with something that works in principle, maybe loses a factor of two
+over a better implementation, but doesn’t require a full-time employee to
+maintain.</p>
+
+<p>The design has a few other appealing features: each of the bits of state are
+contiguous ordered hunks of memory,</p>
+
+<ol>
+  <li>
+    <p>They are relatively easy to serialize to disk and <code class="language-plaintext highlighter-rouge">mmap</code> back in.</p>
+  </li>
+  <li>
+    <p>Processing batches of keys in order results in one sequential scan over each
+array, good for performance and if we spill to disk.</p>
+  </li>
+  <li>
+    <p>The large unit of data means that sharing between operators is relatively low
+cost (we can wrap each layer in a <code class="language-plaintext highlighter-rouge">Rc</code> reference count).</p>
+  </li>
+</ol>
+
+<p>You might notice that this doesn’t yet meet
+<a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-07-26.md#constraint-2-shared-index-structures-between-operators">Constraint #2</a>,
+the requirement that the memory size look something like what it would take to
+write the data down compactly. For example, if all times and deltas are
+identical (say <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">+1</code>, respectively), the <code class="language-plaintext highlighter-rouge">histories</code> field will hold a
+very large amount of identical <code class="language-plaintext highlighter-rouge">(0,1)</code> pairs. There are some remedies that I can
+think of, and will discuss them below, but for the moment too bad.</p>
+
+<h3 id="problem-1-unbounded-increase-in-latency">Problem 1: Unbounded increase in latency</h3>
+
+<p>Latency increases without bound as the computation proceeds. If we were to look
+at memory utilization, we would also see that it increases without bound as the
+computation proceeds. Neither of these are good news if you are expecting to run
+indefinitely.</p>
+
+<p>This is not unexpected for an implementation whose internal datastructures are
+append-only. As a differential dataflow computation proceeds, each operator
+absorbs changes to its inputs and appends them to its internal representation of
+the input. This representation grows and grows, which means (i) it takes more
+memory, and (ii) the operator must flip through more memory to determine the
+state at any given logical time.</p>
+
+<p>Let’s look at an example to see the issue, and get a hint at how to solve it.</p>
+
+<p>In the reachability example above, we update the query set <code class="language-plaintext highlighter-rouge">roots</code> by adding and
+removing elements. These changes look like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>(root, time_1, +1)
+(root, time_2, -1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We add an element <code class="language-plaintext highlighter-rouge">root</code> at some first time, and then subtract it out at some
+later time.</p>
+
+<p>Although it was important to have both of these differences, at some point in
+the computation, once we have processed everything up through <code class="language-plaintext highlighter-rouge">time_2</code>, we are
+going to be scanning these differences over and over, and they will always
+cancel. Not only that, but all of their consequent reachability updates</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>((root, node), (time_1, iter), +1)
+((root, node), (time_2, iter), -1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>are going to live on as well, despite cancelling completely after <code class="language-plaintext highlighter-rouge">time_2</code>.
+Future changes to <code class="language-plaintext highlighter-rouge">edges</code> will flip through each of these updates to determine
+if they should provoke an output update related to <code class="language-plaintext highlighter-rouge">root</code>, and while they will
+eventually determine that no they shouldn’t, they do a fair bit of work to see
+this.</p>
+
+<h4 id="compaction">Compaction</h4>
+
+<p>We know that once we have “passed” <code class="language-plaintext highlighter-rouge">time_2</code> we really don’t care about <code class="language-plaintext highlighter-rouge">root</code>,
+do we? At that point, and from that point forward, its updates will just cancel
+out.</p>
+
+<p>This is true, and while it is good enough for a system where times are totally
+ordered, we need to be a bit smarter with partially ordered times. Martin Abadi
+and I did the math out for “being a bit smarter” a few years ago, and I’m going
+to have to reconstruct it (sadly, our mutual former employer deleted the work).</p>
+
+<p>In a world with partially ordered times, we talk about progress with
+“frontiers”: sets of partially ordered times none of which comes before any
+others in the set. At any point in a timely dataflow computation, there is a
+frontier of logical times defining those logical times we may see in the future:
+times greater or equal to a time in the frontier.</p>
+
+<p>Frontiers are what we will use to compact our differences, rather than the idea
+of “passing” times.</p>
+
+<p>Any frontier of partially ordered elements partitions the set of all times
+(past, present, future) into an equivalence class based on “distinguishability”
+in the future: two times are indistinguishable if they compare identically to
+every future time:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>t1 == t2 : for all f in Future, t1 &lt;= f iff t2 &lt;= f.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>As the only thing we know about times is that they are partially ordered, their
+behavior under the <code class="language-plaintext highlighter-rouge">&lt;=</code> comparison is sufficient to describe each full.
+Differences at indistinguishable times can be coalesced into (at most) one
+difference.</p>
+
+<p>Let’s look at an example. Imagine we have the following updates:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>((a, b), +1) @ (0, 0)
+((b, c), +1) @ (0, 1)
+((a, c), +1) @ (1, 0)
+((b, c), -1) @ (1, 1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So, we initially have an <code class="language-plaintext highlighter-rouge">(a,b)</code> and we generate a <code class="language-plaintext highlighter-rouge">(b,c)</code> in the first
+iteration of some iterative computation, say. Someone then changes our input to
+have <code class="language-plaintext highlighter-rouge">(a,c)</code> in the input, and now we remove <code class="language-plaintext highlighter-rouge">(b,c)</code> in the second iteration.</p>
+
+<p>Imagine now that our frontier, the lower envelope of times we might yet see in
+the computation, is</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>{ (0, 3), (1, 2), (2, 0) } .
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Meaning, we may still see any time that is greater-or-equal to one of these
+times. While this does rule out times like <code class="language-plaintext highlighter-rouge">(0,1)</code> and <code class="language-plaintext highlighter-rouge">(0,2)</code>, it does <em>not</em>
+mean that we can just coalesce them. There is a difference between these two
+times, in that the possible future time <code class="language-plaintext highlighter-rouge">(2,1)</code> can tell them apart:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>(0,1) &lt;= (2,1) : true
+(0,2) &lt;= (2,1) : false
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So how then do we determine which times are equivalent to which others? Ideally,
+we would consult our notes, but this option is not available to us. We can do
+the next best thing, which is to look at
+<a href="https://github.com/MicrosoftResearch/Naiad/blob/release_0.5/Frameworks/DifferentialDataflow/LatticeInternTable.cs#L59-L74">what we did in Naiad’s implementation</a>:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="c1">/// &lt;summary&gt;</span>
+<span class="c1">/// Joins the given time against all elements of reachable times, and returns the meet of these joined times.</span>
+<span class="c1">/// &lt;/summary&gt;</span>
+<span class="c1">/// &lt;param name="s"&gt;&lt;/param&gt;</span>
+<span class="c1">/// &lt;returns&gt;&lt;/returns&gt;</span>
+<span class="k">private</span> <span class="n">T</span> <span class="nf">Advance</span><span class="p">(</span><span class="n">T</span> <span class="n">s</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">Assert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">reachableTimes</span> <span class="p">!=</span> <span class="k">null</span><span class="p">);</span>
+    <span class="n">Debug</span><span class="p">.</span><span class="nf">Assert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">reachableTimes</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">);</span>
+
+    <span class="kt">var</span> <span class="n">meet</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">reachableTimes</span><span class="p">.</span><span class="n">Array</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="nf">Join</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="n">reachableTimes</span><span class="p">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
+        <span class="n">meet</span> <span class="p">=</span> <span class="n">meet</span><span class="p">.</span><span class="nf">Meet</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">reachableTimes</span><span class="p">.</span><span class="n">Array</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">Join</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">meet</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ok, this is <em>NOT</em> Rust. C-sharp is object-orientated, and has a <code class="language-plaintext highlighter-rouge">this</code> keyword
+that wraps some state local to whatever “this” is. It turns out “this” is a
+table of timestamps, whose values we update as <code class="language-plaintext highlighter-rouge">this.reachableTimes</code> advances.
+This <code class="language-plaintext highlighter-rouge">reachableTimes</code> thing is how Naiad refers to frontiers: timestamps that
+the operator can still receive.</p>
+
+<p>What the code tells us is that to determine what a time <code class="language-plaintext highlighter-rouge">s</code> should look like
+given a frontier, we should join <code class="language-plaintext highlighter-rouge">s</code> with each element in the frontier, and take
+its meet. If you aren’t familiar with “join” and “meet”, let’s review those:</p>
+
+<ul>
+  <li>
+    <p>The <strong>join</strong> method determines the least upper bound of two arguments. That is,</p>
+
+    <p>a &lt;= join(a,b), and
+b &lt;= join(a,b), and
+for all c: if (a &lt;= c and b &lt;= c) then join(a,b) &lt;= c.</p>
+  </li>
+</ul>
+
+<p>This may not always exist in a general partial order, so we need to be in at
+  least a join semi-lattice (a partial order where join is always defined).</p>
+
+<ul>
+  <li>
+    <p>The <strong>meet</strong> method determines the greatest lower bound of two arguments. That
+is,</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>meet(a,b) &lt;= a, and
+meet(a,b) &lt;= b, and
+for all c: if (c &lt;= a and c &lt;= b) then c &lt;= meet(a,b).
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+
+    <p>This may not always exist in a general partial order, so we need to be in at
+least a meet semi-lattice (a partial order where meet is always defined).</p>
+  </li>
+</ul>
+
+<p>If both join and meet are defined for all pairs of elements in our partial
+order, we have what is called a
+“<a href="https://en.wikipedia.org/wiki/Lattice_(order)">lattice</a>”. Differential
+dataflow should <em>probably</em> require all of its timestamps to be lattices, but at
+the moment it just uses least upper bounds. This discussion may prompt the
+change to lattices.</p>
+
+<p>For very simple examples of join and meet, consider pairs of integers in which
+you compare pairs coordinate wise, and</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>(a1,b1) &lt;= (a2, b2) iff a1 &lt;= a2 &amp;&amp; b1 &lt;= b2 .
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The join (least upper bound) of two elements is the pair with the
+coordinate-wise maximums, and the meet (greatest lower bound) of two elements is
+the pair with the coordinate-wise minimums.</p>
+
+<h4 id="an-example-redux">An example (redux)</h4>
+
+<p>Let’s look at our example again. We have updates:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>((a, b), +1) @ (0, 0)
+((b, c), +1) @ (0, 1)
+((a, c), +1) @ (1, 0)
+((b, c), -1) @ (1, 1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>and perhaps the frontier is currently</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>{ (0, 3), (1, 2), (2, 0) } .
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can update each of our times using the “meet of joins” rule above, here</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>time -&gt; meet(join(time, (0,3)), join(time, (1,2)), join(time, (2,0)))
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>For each of our times, we get the following updates</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>(0,0) -&gt; meet((0,3), (1,2), (2,0)) = (0,0)
+(0,1) -&gt; meet((0,3), (1,2), (2,1)) = (0,1)
+(1,0) -&gt; meet((1,3), (1,2), (2,0)) = (1,0)
+(1,1) -&gt; meet((1,3), (1,2), (2,1)) = (1,1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>It doesn’t seem like this changed anything, did it? Well, all four times can
+still be distinguished in the future. The future time <code class="language-plaintext highlighter-rouge">(0,3)</code> can tell the
+difference between times that differ in the first coordinate, and the future
+time <code class="language-plaintext highlighter-rouge">(2,0)</code> can distinguish between the times that differ in the second
+coordinate.</p>
+
+<p>Imagine our frontier advances, finishing input epoch zero, and becomes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>{ (1, 2), (2, 0) } .
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now we get different results when we advance times, as the first term drops out
+of each meet.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>(0,0) -&gt; meet((1,2), (2,0)) = (1,0)
+(0,1) -&gt; meet((1,2), (2,1)) = (1,1)
+(1,0) -&gt; meet((1,2), (2,0)) = (1,0)
+(1,1) -&gt; meet((1,2), (2,1)) = (1,1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Ooooo! Now some things are starting to look the same! The two <code class="language-plaintext highlighter-rouge">(b,c)</code> updates in
+times <code class="language-plaintext highlighter-rouge">(0,1)</code> and <code class="language-plaintext highlighter-rouge">(1,1)</code> can now cancel.</p>
+
+<p>Imagine instead we closed our input, removing the possibility of new input
+epochs, setting the frontier to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>{ (0,3), (1,1) }
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now we get even more contraction, where we can contract across iterations as
+well as rounds of input:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>(0,0) -&gt; meet((0,3), (1,1)) = (0,1)
+(0,1) -&gt; meet((0,3), (1,1)) = (0,1)
+(1,0) -&gt; meet((1,3), (1,1)) = (1,1)
+(1,1) -&gt; meet((1,3), (1,1)) = (1,1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now we are able to aggregate updates across iterations, rather than epochs. In
+our example it doesn’t actually change anything, but in an iterative computation
+with closed inputs it means that we can update “in place” rather than retaining
+the history of all iterations.</p>
+
+<p>If both happen, and the frontier becomes just</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>{ (1,1) }
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>all of the updates we have can be aggregated. The meet of joins logic works
+seamlessly for all modes.</p>
+
+<h4 id="proving-things">Proving things</h4>
+
+<p>Imagine we have a frontier F, is it true that the technique above (take the
+meets of joins) is correct? What would that even mean? Here is a correctness
+claim we might try to prove:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>Claim (correctness):
+
+For any frontier F and time s, let
+
+    t = meet_{f in F} join(f,s).
+
+then for all g &gt;= F, we have s &lt;= g iff t &lt;= g.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Let’s prove the <code class="language-plaintext highlighter-rouge">iff</code> in two parts,</p>
+
+<ol>
+  <li>**If <code class="language-plaintext highlighter-rouge">t &lt;= g</code>, then <code class="language-plaintext highlighter-rouge">s &lt;= g</code>: **</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>For any `f` we have that `s &lt;= join(s,f)`, but in particular for those
+`f in F`. Because `s` is less than all terms in the meet, and by the main
+property of meets, we have that `s &lt;= t` as `t` is that meet. We combine
+this with the assumption `t &lt;= g` and reach our conclusion using
+transitivity of `&lt;=`.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ol>
+  <li>
+    <p>**If <code class="language-plaintext highlighter-rouge">s &lt;= g</code>, then <code class="language-plaintext highlighter-rouge">t &lt;= g</code>: **</p>
+
+    <p>By assumption, <code class="language-plaintext highlighter-rouge">g</code> is greater than or equal to some element <code class="language-plaintext highlighter-rouge">f in F</code>. As
+such, <code class="language-plaintext highlighter-rouge">join(s,f) &lt;= g</code>, by the main property of joins (as both <code class="language-plaintext highlighter-rouge">s &lt;= g</code> and
+<code class="language-plaintext highlighter-rouge">f &lt;= g</code>). The meet operation always produces an element less or equal to
+its arguments, and because the definition of <code class="language-plaintext highlighter-rouge">t</code> has at least the
+<code class="language-plaintext highlighter-rouge">join(s,f)</code> term in its meets, we conclude that <code class="language-plaintext highlighter-rouge">t &lt;= g</code>.</p>
+  </li>
+</ol>
+
+<p>Wow proofs are fun! Let’s do another one!</p>
+
+<p>How about proving that this contraction is optimal? What would that even mean?
+Here is an optimality claim we might try and prove:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>Claim (optimality):
+
+For two times s1 and s2, if for all g &gt;= F we have that
+
+	s1 &lt;= g iff s2 &lt;= g ,
+
+then meet_{f in F} join(f,s1) == meet_{f in F} join(f,s2).
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>What we are saying here is that if two times are in fact indistinguishable for
+all future times, then they will result in the same surrogate times <code class="language-plaintext highlighter-rouge">t1</code> and
+<code class="language-plaintext highlighter-rouge">t2</code>. As we cannot correctly equate two times that are not indistinguishable,
+this would be optimality.</p>
+
+<p>Let’s try and prove this.</p>
+
+<p><strong>Proof deferred.</strong> I couldn’t remember how to prove optimality, or even if we
+did prove it. Sigh. However, I asked Martin Abadi what he thought, and he came
+back with the following alternate optimality statement, which I’m going to call
+“maximality” to keep it clear from the previous claim.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>Claim (maximality):
+
+For two times s and t', if for all g &gt;= F we have that
+
+	s &lt;= g iff t' &lt;= g
+
+then
+
+	t' &lt;= meet_{f in F} join(f,s).
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>What this claim says is that if you were thinking of contracting <code class="language-plaintext highlighter-rouge">s</code> to any time
+<code class="language-plaintext highlighter-rouge">t'</code> other than <code class="language-plaintext highlighter-rouge">meet_{f in F} join(f,s)</code>, your <code class="language-plaintext highlighter-rouge">t'</code> will have to be less or
+equal to ours. Our choice is “maximal”, in that sense. This proves that we’ve
+done as well as we can, but it doesn’t prove that if <code class="language-plaintext highlighter-rouge">s1</code> and <code class="language-plaintext highlighter-rouge">s2</code> are
+indistinguishable they result in the same contraction. Yet!</p>
+
+<p>Here is Martin’s proof (mutatis mutandis):</p>
+
+<p>For all <code class="language-plaintext highlighter-rouge">f</code> (but in particular <code class="language-plaintext highlighter-rouge">f in F</code>) we have that <code class="language-plaintext highlighter-rouge">s &lt;= join(f,s)</code> by the
+properties of join, and because <code class="language-plaintext highlighter-rouge">join(f,s) &gt;= F</code> we have by assumption that
+<code class="language-plaintext highlighter-rouge">t' &lt;= join(f,s)</code>. As this holds for all <code class="language-plaintext highlighter-rouge">f in F</code>, <code class="language-plaintext highlighter-rouge">t'</code> must also be less or
+equal to the meet of all these terms, by the main property of meet. Done!</p>
+
+<p>Now we can prove optimality, using maximality as help.</p>
+
+<p>First, let’s define</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>t1 = meet_{f in F} join(f,s1), and
+t2 = meet_{f in F} join(f,s2).
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now, we have assumed that <code class="language-plaintext highlighter-rouge">s1</code> and <code class="language-plaintext highlighter-rouge">s2</code> are indistinguishable in the future of
+<code class="language-plaintext highlighter-rouge">F</code>, and we know by correctness that <code class="language-plaintext highlighter-rouge">s1</code> and <code class="language-plaintext highlighter-rouge">t1</code> are similarly
+indistinguishable, as are <code class="language-plaintext highlighter-rouge">s2</code> and <code class="language-plaintext highlighter-rouge">t2</code>. This means that <code class="language-plaintext highlighter-rouge">s1</code> and <code class="language-plaintext highlighter-rouge">t2</code> are
+indistinguishable, as are <code class="language-plaintext highlighter-rouge">s2</code> and <code class="language-plaintext highlighter-rouge">t1</code>. Applying each of these observations
+with maximality, we conclude that</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>t1 &lt;= meet_{f in F} join(f,s2), and
+t2 &lt;= meet_{f in F} join(f,s1).
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>However, the right hand sides are exactly <code class="language-plaintext highlighter-rouge">t2</code> and <code class="language-plaintext highlighter-rouge">t1</code>, respectively, and if
+each of <code class="language-plaintext highlighter-rouge">t1</code> and <code class="language-plaintext highlighter-rouge">t2</code> are less or equal to each other, they must be the same
+(the “antisymmetry” property of a partial order). Done!</p>
+
+<p>Proofs are still fun! Let’s hope it’s actually true.</p>
+
+<h4 id="implementation">Implementation</h4>
+
+<p>We now have an awesome rule for compacting differences, by advancing timestamps
+using the rule from up above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>advance(s,F) = meet_{f in F} join(s,y) .
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We can apply this rule whenever we get a chance to rewrite bits of internal
+state. Our optimality result tells us that as long as we apply this rule
+regularly enough, we should be able to cancel any indistinguishable updates.</p>
+
+<p>For various reasons, including compaction, we will make sure we take this
+opportunity regularly. In the log-structured merge thing up above, each time we
+do a merge we can write new times out after subjecting them to this change.</p>
+
+<p>In principle, we could also use this rule to rewrite times within layers of the
+merge trie, though I’m a bit hesitant to do that without thinking harder about
+the implications of departing from the immutable realm.</p>
+
+<h3 id="problem-2-poor-scaling-with-small-updates">Problem 2: Poor scaling with small updates</h3>
+
+<p>As we increase the number of workers, we hope to see a corresponding improvement
+in performance. This improvement can take a few different forms:</p>
+
+<ul>
+  <li><strong>Weak scaling:</strong></li>
+</ul>
+
+<p>As the number of workers increases, the amount of work that can be performed
+  in a fixed time increases.</p>
+
+<p>As best as I understand, differential dataflow does a fine job with weak
+  scaling: more workers can do more work in a fixed amount of time. Increasing
+  the amount of work does not need to increase the amount of coordination, as
+  long as the number of batches do not increase. The downside here is that</p>
+
+<ul>
+  <li><strong>Strong scaling:</strong></li>
+</ul>
+
+<p>As the number of workers increases, the amount of time taken to perform a
+  fixed amount of work decreases.</p>
+
+<p>Adding more workers does not necessarily decrease the amount of time to
+  perform a fixed amount of work. In the limit, when each batch has just a
+  single record, the existence of additional workers simply does not offer
+  anything of use; the single record goes to one worker who is then the only
+  worker able to perform productive computation.</p>
+
+<p>Lots of systems do weak scaling pretty well, and strong scaling up to a point.
+While we want as much strong scaling as possible, there is only so fast we can
+hope to go (with me writing all the code).</p>
+
+<h4 id="high-resolution-timestamps">High-resolution timestamps</h4>
+
+<p>Rather than try and get excellent strong scaling, our somewhat more modest goal
+is to develop weak scaling without altering the resolution of timestamps in
+differential dataflow. That is, we will accept inputs at the same frequency as a
+strongly scaled system (high resolution) and produce outputs with the same
+frequency, but we only need to sustain a high throughput rather than low
+latency.</p>
+
+<p>For any example of what I’m talking about, think about a sequence of ten
+updates:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>(datum_0, 0, +1)
+(datum_1, 1, +1)
+..
+(datum_9, 9, +1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In our current implementation, these each have distinct times, and go into
+distinct input batches. Each worker worries about the completion of each batch
+independently, and doesn’t get started on batch 7 until all batches up to and
+including batch 6 have been confirmed processed.</p>
+
+<p>It doesn’t have to work this way (and doesn’t, in some other systems).</p>
+
+<p>Timely dataflow certainly allows for multiple times in flight, and if we put all
+ten messages into the system and announce “done with rounds <code class="language-plaintext highlighter-rouge">0-9</code>”, each
+differential dataflow operator will pick up various messages, let’s say a worker
+picks up <code class="language-plaintext highlighter-rouge">datum_7</code>, and receives word from timely dataflow that all inputs up
+through round <code class="language-plaintext highlighter-rouge">9</code> are accounted for. The work isn’t all done yet, but the
+operator now knows enough to get processing.</p>
+
+<p>Conceptually, we are going to take this approach, with some implementation
+details fixed.</p>
+
+<p>Timely dataflow’s progress tracking machinery gets stressed out proportional to
+the number of distinct times that you use. Each distinct time needs to be
+announced to all other participants, so even if there is just one data record
+there would be <code class="language-plaintext highlighter-rouge">#workers</code> control messages sent out. This means that we
+shouldn’t really send records at individual times. In addition, all sorts of
+internal buffering and such are broken on timestamp boundaries; all channel
+buffers get flushed, that sort of thing. We’d really like to avoid that.</p>
+
+<p>Fortunately, there is something simple and smart to do, lifted from timely
+dataflow’s logging infrastructure. Rather than have each time with a distinct
+timestamp, we use just the smallest timestamp and send several records whose
+actual times are presented as data. For example,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>((datum_0, 0), 0, +1)
+((datum_1, 1), 0, +1)
+..
+((datum_9, 9), 0, +1)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Here we’ve sent the same data all with timestamp zero, but we have provided
+enough information to determine the actual time for each record.</p>
+
+<p>Let’s call the actual timely dataflow timestamp the “message timestamp”; this is
+the one that is all zeros. Let’s call the embedded timestamp the “data
+timestamp”; this ranges from zero up to nine in this example. The choice to have
+each data timestamp in the future of the message timestamp results in two
+important properties:</p>
+
+<ol>
+  <li>
+    <p>Operators receive messages with a message timestamp that allows them to send
+messages with received data timestamp. Operators can safely “advance” any
+capability they hold, and in particular they can advance the message
+timestamp capability to be a capability for any data timestamp.</p>
+  </li>
+  <li>
+    <p>When timely guarantees that no messages will arrive with message timestamp
+<code class="language-plaintext highlighter-rouge">time</code>, the same must also true for data timestamp <code class="language-plaintext highlighter-rouge">time</code>. This ensures that
+any logic based on timely dataflow progress statements can still be effected.</p>
+  </li>
+</ol>
+
+<p>What we’ve done here is embed a higher-resolution timestamp in a
+lower-resolution timestamp, using the former for application logic and the
+latter for progress logic. We haven’t committed to any particular difference
+between the two, and we seem to be at liberty to lower the resolution for
+progress tracking as we see fit.</p>
+
+<p>The downside to lower-resolution progress tracking is that other workers don’t
+learn as quickly that they can make forward progress. You might be sitting on a
+message with message timestamp <code class="language-plaintext highlighter-rouge">0</code> and a record with data timestamp
+<code class="language-plaintext highlighter-rouge">10_000_000</code>, which is totally safe and correct, but really annoying to all the
+other workers who are waiting to see if you produce a message with message and
+data timestamp <code class="language-plaintext highlighter-rouge">0</code>. One can imagine lots of policies to address this, so let’s
+name a few.</p>
+
+<h5 id="millisecond-resolution">Millisecond resolution</h5>
+
+<p>One very simple scheme fixes the lower-resolution timestamp to be something like
+“milliseconds” and has the data timestamp indicate the remaining fractional
+millisecond, giving us nanosecond accuracy at the data timestamp level.</p>
+
+<p>This approach has one very appealing property, which is that because all workers
+use the same scaling, when timely dataflow indicates that time <code class="language-plaintext highlighter-rouge">i</code> has completed
+you know that all times up to <code class="language-plaintext highlighter-rouge">i+1</code> are complete. Not just <code class="language-plaintext highlighter-rouge">i</code> milliseconds, but
+anything strictly less than <code class="language-plaintext highlighter-rouge">i+1</code> milliseconds.</p>
+
+<p>The downside here is lack of flexibility. Perhaps in a millisecond we can
+accumulate thousands of records; we will have to wait for the millisecond to
+expire before we start processing them.</p>
+
+<h5 id="variable-resolution">Variable resolution</h5>
+
+<p>A more optimistic approach might pay attention to how much data is being sent,
+and refresh the message timestamp every 1024 records it sends, or something
+similarly chosen to amortize the amount of progress traffic that will result
+against the data being sent. This ensures that there is at least a certain
+amount of work in each batch for each other worker.</p>
+
+<p>One must use a bit of care here to ensure that the timestamps are a coarsening
+of some common time. It would be too bad if one operator had relatively few
+records to ingest, and advanced times at a slower rate than other operators.
+Rather, each should probably have some common notion of time, and when it is
+time to advance the low-resolution timestamp each worker consults the common
+time and leaps to its now current value.</p>
+
+<p>The downside here is less information about what progress information from
+timely dataflow means. Whereas up above, an indication that time <code class="language-plaintext highlighter-rouge">i</code> was
+complete meant up to <code class="language-plaintext highlighter-rouge">i+1</code>, here it means no such thing.</p>
+
+<h4 id="operator-implementations">Operator implementations</h4>
+
+<p>Differential dataflow’s operator implementations currently act “time-at-a-time”,
+maintaining a list of timestamps they should process and acting on each in turn.
+What the operator does depends on the operator, but it typically involves
+looking at the history for certain keys, up to and including the timestamp. The
+“time-at-a-time” discipline works well enough if there are few times, but when
+there are as many timestamps as there are data records, it needs a bit more
+thought.</p>
+
+<p>The “time-at-a-time” discipline does maintain an important property, that each
+key processes its timestamps according to their partial order. We can still
+maintain this property if we want to retire a large batch of data timestamps at
+once, roughly as:</p>
+
+<ol>
+  <li>
+    <p>Identify the subset of unprocessed <code class="language-plaintext highlighter-rouge">((data, dtime), mtime, delta)</code> tuples for
+which <code class="language-plaintext highlighter-rouge">dtime</code> is not greater or equal to any element in the operator’s input
+frontier (the condition normally used for <code class="language-plaintext highlighter-rouge">mtime</code>).</p>
+  </li>
+  <li>
+    <p>Group this subset by <code class="language-plaintext highlighter-rouge">key</code>, and order within each key respecting the partial
+order on <code class="language-plaintext highlighter-rouge">dtime</code>.</p>
+  </li>
+  <li>
+    <p>For each <code class="language-plaintext highlighter-rouge">(key, dtime)</code> pair, do the thing the operator used to do for each
+<code class="language-plaintext highlighter-rouge">(mtime, key)</code> pair.</p>
+  </li>
+</ol>
+
+<p>One advantage this new approach has is that despite a large number of times to
+process, we still make just one sequential scan through the keys, resulting in
+at most one scan through the collection store.</p>
+
+<p>There are likely to be an abundance of other subtle issues about operator
+implementations, which I can’t yet foresee. This is one of the advantages of
+writing code though, rather than just speculating. You get to find out!</p>
+
+<h4 id="timely-dataflow">Timely dataflow</h4>
+
+<p>It would be great for timely dataflow to support lower-resolution timestamps for
+progress tracking natively. It isn’t obvious that there is one correct way to do
+it, so for now we are going to try it out “user mode” style. Perhaps we will
+learn something about it (e.g. “not worth it”) that will inform a timely
+adoption.</p>
+
+<h3 id="constraint-1-compact-representation-in-memory">Constraint 1: Compact representation in memory</h3>
+
+<p>A collection represents a set of tuples of type <code class="language-plaintext highlighter-rouge">((Key, Val), Time, isize)</code>. If
+we were to write them down, the space requirements would be</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>size_of::&lt;((Key, Val), Time, isize)&gt;() * #(distinct (key,val,time)s)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>because any tuples with the same <code class="language-plaintext highlighter-rouge">(key,val,time)</code> entries can be coalesced.</p>
+
+<p>But simply writing down the tuples is not the most efficient way to represent
+them. We have seen above the “trie” representation, which sorts tuples and
+compresses out common prefixes. For example, the trie representation would
+require</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>  size_of::&lt;(Key, usize)&gt;() * #(distinct keys)
++ size_of::&lt;(Val, usize)&gt;() * #(distinct (key,val)s)
++ size_of::&lt;(Time, isize)&gt;() * #(distinct (key,val,time)s)
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This can be much smaller than the raw tuple representation. It has other
+advantages, like clearly indicating where key and value ranges start and stop,
+which means our code doesn’t constantly have to check.</p>
+
+<p>In principle, the data can be much smaller still in some not-uncommon cases.
+When the data are static, for example, we have no need of the <code class="language-plaintext highlighter-rouge">(time, isize)</code>
+entries because nothing changes. Even when the data are not static, but have a
+large number of entries have timestamps that can be contracted to the same
+timestamp, most of the data do not require <code class="language-plaintext highlighter-rouge">(time, isize)</code> entries.</p>
+
+<p>Economies like this can be accommodated using alternate trie representations.
+Relatively few distinct timestamps are well accommodated by a trie for data
+structured as <code class="language-plaintext highlighter-rouge">(time, (key, val), delta)</code>, organized first by time. This type of
+arrangement has the annoyance that <code class="language-plaintext highlighter-rouge">key</code> data are multiple locations, and must
+be merged in order to determine cumulative counts at any time. This is not such
+a pain for few times, as we were going to need to merge the geometrically sized
+trie layers anyhow, but obviously more difficult and less efficient when the
+number of times is large.</p>
+
+<p>At the moment, I don’t have particularly great thoughts on choosing between
+these representations other than to try and have a solid trait hiding the
+specifics, behind which we can put several implementations. With some luck, we
+could even have composite implementations that wrap a few implementations and
+drop tuples into the one best suited to represent them. But decisions that
+prevent something like this seem like poor ideas.</p>
+
+<h3 id="constraint-2-shared-index-structures-between-operators">Constraint 2: Shared index structures between operators</h3>
+
+<p>Several computations re-use the same collection indexed the same way. For
+example, the “people you may know” query from the recent
+<a href="https://github.com/frankmcsherry/blog/blob/master/posts/2016-06-21.md">differential dataflog post</a>,
+which looks like so:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c1">// symmetrize the graph, because they do that too.</span>
+<span class="k">let</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="nf">.map</span><span class="p">(|(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)|</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">))</span><span class="nf">.concat</span><span class="p">(</span><span class="o">&amp;</span><span class="n">graph</span><span class="p">);</span>
+
+<span class="n">graph</span><span class="nf">.semijoin</span><span class="p">(</span><span class="o">&amp;</span><span class="n">query</span><span class="p">)</span>
+     <span class="nf">.map</span><span class="p">(|(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)|</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+     <span class="nf">.join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">graph</span><span class="p">)</span>
+     <span class="nf">.map</span><span class="p">(|(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">)|</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">))</span>
+     <span class="nf">.filter</span><span class="p">(|</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">)|</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">z</span><span class="p">)</span>
+     <span class="c1">// &lt;-- put antijoin here if you had one</span>
+     <span class="nf">.topk</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The collection <code class="language-plaintext highlighter-rouge">graph</code> is used twice; both times its edge records
+<code class="language-plaintext highlighter-rouge">(source, target)</code> are keyed by <code class="language-plaintext highlighter-rouge">source</code>. The code as written above with have
+both <code class="language-plaintext highlighter-rouge">semijoin</code> and <code class="language-plaintext highlighter-rouge">join</code> create and maintain their own indexed copies of the
+data.</p>
+
+<p>We can be less wasteful by explicitly managing the arrangement of data into
+indexed collections, and the sharing of those collections between operators.
+Each of <code class="language-plaintext highlighter-rouge">semijoin</code> and <code class="language-plaintext highlighter-rouge">join</code> internally use differential’s <code class="language-plaintext highlighter-rouge">arrange</code> operator,
+which takes a keyed collection of data and returns an <code class="language-plaintext highlighter-rouge">Arranged</code>, which contains
+a reference counted pointer to the collection trace the arrange operator
+maintains. Because the collection is logically append-only, the sharing can be
+made relatively safe (there are rules on how you are allowed to interpret the
+contents).</p>
+
+<p>Explicitly arranging and then re-using the arrangements, the code above looks
+like (note: arrangement not currently optimized for visual appeal):</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="c1">// symmetrize the graph</span>
+<span class="k">let</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="nf">.map</span><span class="p">(|(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)|</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">))</span><span class="nf">.concat</span><span class="p">(</span><span class="o">&amp;</span><span class="n">graph</span><span class="p">);</span>
+
+<span class="c1">// "arrange" graph, because we'll want to use it twice the same way.</span>
+<span class="k">let</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">graph</span><span class="nf">.arrange_by_key</span><span class="p">(|</span><span class="n">k</span><span class="p">|</span> <span class="n">k</span><span class="nf">.clone</span><span class="p">(),</span> <span class="p">|</span><span class="n">x</span><span class="p">|</span> <span class="p">(</span><span class="nn">VecMap</span><span class="p">::</span><span class="nf">new</span><span class="p">(),</span> <span class="n">x</span><span class="p">));</span>
+<span class="k">let</span> <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="nf">.arrange_by_self</span><span class="p">(|</span><span class="n">k</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">u32</span><span class="p">|</span> <span class="n">k</span><span class="nf">.as_u64</span><span class="p">(),</span> <span class="p">|</span><span class="n">x</span><span class="p">|</span> <span class="p">(</span><span class="nn">VecMap</span><span class="p">::</span><span class="nf">new</span><span class="p">(),</span> <span class="n">x</span><span class="p">));</span>
+
+<span class="c1">// restrict attention to edges from query nodes</span>
+<span class="n">graph</span><span class="nf">.join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">query</span><span class="p">,</span> <span class="p">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">_</span><span class="p">|</span> <span class="p">(</span><span class="n">v</span><span class="nf">.clone</span><span class="p">(),</span> <span class="n">k</span><span class="nf">.clone</span><span class="p">()))</span>
+     <span class="nf">.arrange_by_key</span><span class="p">(|</span><span class="n">k</span><span class="p">|</span> <span class="n">k</span><span class="nf">.clone</span><span class="p">(),</span> <span class="p">|</span><span class="n">x</span><span class="p">|</span> <span class="p">(</span><span class="nn">VecMap</span><span class="p">::</span><span class="nf">new</span><span class="p">(),</span> <span class="n">x</span><span class="p">))</span>
+     <span class="nf">.join</span><span class="p">(</span><span class="o">&amp;</span><span class="n">graph</span><span class="p">,</span> <span class="p">|</span><span class="n">_</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">|</span> <span class="p">(</span><span class="n">x</span><span class="nf">.clone</span><span class="p">(),</span> <span class="n">y</span><span class="nf">.clone</span><span class="p">()))</span>
+     <span class="nf">.map</span><span class="p">(|(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">)|</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">))</span>
+     <span class="nf">.filter</span><span class="p">(|</span><span class="o">&amp;</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">)|</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">z</span><span class="p">)</span>
+     <span class="c1">// &lt;-- put antijoin here if you had one</span>
+     <span class="nf">.topk</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>There is some excessive arrangement going on (e.g. <code class="language-plaintext highlighter-rouge">query</code> and the results of
+the first <code class="language-plaintext highlighter-rouge">join</code>) because the arranged operators only work on pairs of
+arrangements. This could be cleaned up if important, but it is assumed you know
+a bit about what you are doing at this point.</p>
+
+<p>If all of the code above makes little sense, it boils down to: whatever we do
+with our collection data structure, we need to worry that multiple operators may
+be looking at the same data.</p>
+
+<p>For example, in the context of one operator we can easily speak about “the
+frontier” and do compaction based on this information. When multiple operators
+are sharing the same data, there is no one frontier; there is a set of
+frontiers, or something like that. It can all be made to work (mostly you just
+union together the frontiers with <code class="language-plaintext highlighter-rouge">MutableAntichain</code>), but some attention to
+detail is important.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>This is a pretty beefy write-up, and possibly more for my benefit than for yours
+(maybe I should have said that at the beginning; I’ve most realized it here at
+the end, though). I’d really like to lay out the criteria for a successful data
+structure and maintenance strategy more clearly, but there are lots of
+constraints that come together. For now, I think it is time to start trying it
+out and seeing what goes horribly wrong. Then I can tell you about that.</p>
+
+
+        <!-- Post Pager -->
+        <div>
+          <hr style="visibility: hidden" />
+          <ul class="pager"><li class="previous">
+              <a
+                href="/pages/manifoldfinance/primitives/lockfiles-in-linux"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="File locking in Linux"
+              >
+                Previous<br />
+                <span>File locking in Linux</span>
+              </a>
+            </li><li class="next">
+              <a
+                href="/pages/manifoldfinance/primitives/high-resolution-high-throughput"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="High Resolution High Throughput"
+              >
+                Next<br />
+                <span>High Resolution High Throughput</span>
+              </a>
+            </li></ul>
+          <hr style="visibility: hidden" />
+        </div></div><!-- Side Catalog Container -->
+      <div
+        class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container"
+      >
+        <div class="side-catalog">
+          <hr class="hidden-sm hidden-xs" />
+          <h5>
+            <a class="catalog-toggle" href="#">CATALOG</a>
+          </h5>
+          <ul class="catalog-body"></ul>
+        </div>
+      </div><!-- Sidebar Container -->
+      <div
+        class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container"
+      ><!-- Featured Tags -->
+<section><hr class="hidden-sm hidden-xs"><h5>
+        <a href="/pages/manifoldfinance/primitives/archive/">FEATURED TAGS</a>
+    </h5>
+    <div class="tags"><a data-sort="0014"
+            href="/pages/manifoldfinance/primitives/archive/?tag=distributed+computing"
+            title="distributed computing"
+            rel="3">distributed computing</a><a data-sort="0014"
+            href="/pages/manifoldfinance/primitives/archive/?tag=ethereum"
+            title="ethereum"
+            rel="3">ethereum</a><a data-sort="0015"
+            href="/pages/manifoldfinance/primitives/archive/?tag=blockchain"
+            title="blockchain"
+            rel="2">blockchain</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=DAO"
+            title="DAO"
+            rel="1">DAO</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=Jekyll"
+            title="Jekyll"
+            rel="1">Jekyll</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=Markdown"
+            title="Markdown"
+            rel="1">Markdown</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=amm"
+            title="amm"
+            rel="1">amm</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=analysis"
+            title="analysis"
+            rel="1">analysis</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=client+development"
+            title="client development"
+            rel="1">client development</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=dao"
+            title="dao"
+            rel="1">dao</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=devops"
+            title="devops"
+            rel="1">devops</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=gitops"
+            title="gitops"
+            rel="1">gitops</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=governance"
+            title="governance"
+            rel="1">governance</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=json+rpc"
+            title="json rpc"
+            rel="1">json rpc</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=nix"
+            title="nix"
+            rel="1">nix</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=protocol"
+            title="protocol"
+            rel="1">protocol</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=routing"
+            title="routing"
+            rel="1">routing</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=sushiswap"
+            title="sushiswap"
+            rel="1">sushiswap</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=tooling"
+            title="tooling"
+            rel="1">tooling</a><a data-sort="0016"
+            href="/pages/manifoldfinance/primitives/archive/?tag=trading"
+            title="trading"
+            rel="1">trading</a>
+    </div>
+</section>
+</div>
+    </div>
+  </div>
+</article>
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><!-- SNS -->
+<ul class="list-inline text-center">
+  
+  <li>
+    <a href="/pages/manifoldfinance/primitives/feed.xml">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li><li>
+    <a target="_blank" href="mailto:sam@manifoldfinance.com">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li><li>
+    <a target="_blank" href="https://github.com/manifoldfinance">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fab fa-github fa-stack-2x"></i>
+      </span>
+    </a>
+  </li><li>
+    <a href="https://twitter.com/foldfinance">
+      <span class="fa-stack fa-lg">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li></ul>
+<p class="copyright text-muted">See
+          <a href="https://github.com/sambacha"></a> @sambacha | &copy; 2022-2024 manifoldfinance
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- jQuery -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+  integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+  crossorigin="anonymous"
+></script>
+
+<!-- Bootstrap JavaScript-->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+  integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+  crossorigin="anonymous"
+></script>
+
+<!-- Simple Jekyll Search -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.7.12/simple-jekyll-search.min.js"
+  integrity="sha512-APy7Ff/y4pdIHleqiTMcRZ8Wu6tjfqhJpgAcaCvTuFQPj/G+/A5u0uZi/DkfkuLQ6FeFmDJgh/zl0y3If/VUyA=="
+  crossorigin="anonymous"
+></script>
+
+<!-- MathJax https://github.com/mathjax/MathJax/issues/2220 -->
+<script>
+  MathJax = {
+    options: {
+      renderActions: {
+        /* add a new named action not to override the original 'find' action */
+        find_script_mathtex: [
+          10,
+          function (doc) {
+            for (const node of document.querySelectorAll(
+              'script[type^="math/tex"]',
+            )) {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(
+                node.textContent,
+                doc.inputJax[0],
+                display,
+              );
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = { node: text, delim: '', n: 0 };
+              math.end = { node: text, delim: '', n: 0 };
+              doc.math.push(math);
+            }
+          },
+          '',
+        ],
+      },
+    },
+  };
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.5/es5/tex-chtml.js"
+  integrity="sha512-WIPUeuVusAT6dUtN6xKArYCBEa76ltyvaz3ltvQd+dy7ISdGJv1Y3y7eDBEF986YfNtmZGLdAaEBSgeBb+8OSg=="
+  crossorigin="anonymous"
+></script>
+
+<!-- Async load function -->
+<script>
+  function async(u, c) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          c(null, e);
+        },
+        false,
+      );
+    }
+    s.parentNode.insertBefore(o, s);
+  }
+</script><!-- AnchorJS -->
+<script>
+  async(
+    'https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js',
+    function () {
+      anchors.options = {
+        visible: 'hover',
+      };
+      anchors
+        .add()
+        .remove('.intro-header h1')
+        .remove('.subheading')
+        .remove('.sidebar-container h5');
+    },
+  );
+</script><!-- Custom JavaScript -->
+<script src="/pages/manifoldfinance/primitives/assets/js/main.js"></script><!-- Side Catalog -->
+<script src="/pages/manifoldfinance/primitives/assets/js/catalog.js"></script></body>
+</html>
