@@ -16,5 +16,8 @@
   "homepage": "https://github.com/manifoldfinance/primitives#readme",
   "devDependencies": {
     "gh-pages": "^4.0.0"
+  },
+  "dependencies": {
+    "pagefind": "^1.1.0"
   }
 }
