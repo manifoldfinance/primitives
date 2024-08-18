@@ -6,9 +6,6 @@ categories: []
 tags: ['ethereum', 'json rpc', 'client development']
 ---
 
----
-
-# Ad-hoc State Simulations of Contracts via Overlays
 
 Erigon has introduced a powerful new feature called `overlays`, enabling ad-hoc state simulations of contracts. This allows users to replay the state with modified bytecode across any given block range, enhancing flexibility in contract testing and development.
 
